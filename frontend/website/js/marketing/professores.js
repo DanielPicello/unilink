@@ -9,13 +9,13 @@ pesquisa.addEventListener("input", () => {
         const universidade = card.querySelector(".universidade").textContent.toLowerCase();
         const formacao = card.querySelector(".formacao").textContent.toLowerCase();
 
-        if(
+        if (
             nome.includes(texto) ||
             universidade.includes(texto) ||
             formacao.includes(texto)
-        ){
+        ) {
             card.style.display = "";
-        }else{
+        } else {
             card.style.display = "none";
         }
     });
@@ -24,16 +24,15 @@ pesquisa.addEventListener("input", () => {
 filtros.forEach(filtro => {
     filtro.addEventListener("click", () => {
         const categoria = filtro.dataset.filtro;
-        console.log(categoria);
 
-        cards.forEach(card =>{
+        cards.forEach(card => {
 
             const materia = card.dataset.materia;
             if (categoria === "todos" || materia === categoria) {
-                card.style.display = "block"; 
-               } else {
-                    card.style.display = "none";
-                }
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
         });
     });
 });

@@ -1,21 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/auth/register.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
+
 <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <header id="header">
-         <nav class="navbar">
+        <nav class="navbar">
             <a href="index.html" class="logo">
                 <div class="logo-icon">
                     <img src="img/marca/logo.png" alt="Logo">
                 </div>
-                <span >Uni<span style="color:#2563EB">Link</span></span>
+                <span>Uni<span style="color:#2563EB">Link</span></span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -52,7 +56,7 @@
             </div>
         </nav>
     </header>
-    <main class="register-page">
+    <main id="conteudo" tabindex="-1" class="register-page">
         <div class="register-container">
 
             <div class="register-steps">
@@ -125,102 +129,122 @@
                     <p class="register-subtitle">
                         Vamos criar sua conta.
                     </p>
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label data-field="name-label">Nome completo</label>
-                            <input type="text" data-field="name-input" placeholder="Ex: Maria Silva">
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail</label>
-                            <input type="email" placeholder="voce@exemplo.com">
-                        </div>
-                        <div class="form-group">
-                            <label>Senha</label>
-                            <input type="password" placeholder="••••••••">
-                        </div>
-                        <div class="form-group">
-                            <label>Confirmar senha</label>
-                            <input type="password" placeholder="••••••••">
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <div class="password-field">
+                            <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres"
+                                autocomplete="new-password">
+                            <button type="button" class="password-toggle" data-toggle-password="password"
+                                aria-label="Mostrar senha" aria-pressed="false">
+                                <i class='bx bx-show' aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar senha</label>
+                        <div class="password-field">
+                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                placeholder="Repita a senha" autocomplete="new-password">
+                            <button type="button" class="password-toggle" data-toggle-password="confirmPassword"
+                                aria-label="Mostrar senha" aria-pressed="false">
+                                <i class='bx bx-show' aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="auth-feedback" id="step2Feedback" role="alert" aria-live="polite" hidden></div>
                     <div class="register-footer register-footer-split">
-                        <button class="register-back-btn" data-back>
+                        <button class="register-back-btn" data-back type="button">
                             <i class='bx bx-left-arrow-alt'></i>
                             Voltar
                         </button>
-                        <button class="register-button" data-next="3">
+                        <button class="register-button" data-next="3" type="button">
                             Continuar
                             <i class='bx bx-right-arrow-alt'></i>
                         </button>
                     </div>
                 </div>
                 <div class="register-panel" data-step-panel="3" style="display:none">
-                    <h1 class="register-title">Sobre você</h1>
-                    <p class="register-subtitle">
+                    <h1 class="register-title" id="step3Title">Sobre você</h1>
+                    <p class="register-subtitle" id="step3Subtitle">
                         Conte um pouco para personalizar seu perfil.
                     </p>
+
                     <div class="form-grid" data-profile-fields="student" style="display:none">
                         <div class="form-group">
-                            <label>Nível de ensino</label>
-                            <input type="text" placeholder="Ex: Ensino Médio">
-                        </div>
-                        <div class="form-group">
-                            <label>Cidade</label>
-                            <input type="text" placeholder="Ex: São Paulo">
+                            <label for="educationLevel">Nível de ensino</label>
+                            <input type="text" id="educationLevel" name="educationLevel" placeholder="Ex: Ensino Médio"
+                                maxlength="80">
                         </div>
                     </div>
+
                     <div class="form-grid" data-profile-fields="teacher" style="display:none">
                         <div class="form-group">
-                            <label>Universidade</label>
-                            <input type="text" placeholder="Ex: USP">
+                            <label for="university">Universidade</label>
+                            <input type="text" id="university" name="university" placeholder="Ex: USP" maxlength="150">
                         </div>
                         <div class="form-group">
-                            <label>Curso</label>
-                            <input type="text" placeholder="Ex: Engenharia Civil">
+                            <label for="course">Curso</label>
+                            <input type="text" id="course" name="course" placeholder="Ex: Engenharia Civil"
+                                maxlength="150">
                         </div>
                         <div class="form-group">
-                            <label>Período</label>
-                            <input type="text" placeholder="Ex: 5º">
+                            <label for="period">Período</label>
+                            <input type="text" id="period" name="period" placeholder="Ex: 5º" maxlength="50">
                         </div>
                         <div class="form-group">
-                            <label>Valor por hora (R$)</label>
-                            <input type="text" placeholder="60">
+                            <label for="hourlyRate">Valor por hora (R$)</label>
+                            <input type="text" id="hourlyRate" name="hourlyRate" inputmode="decimal"
+                                placeholder="Ex: 60 ou 60,50">
                         </div>
                         <div class="form-group form-group-full">
-                            <label>Matérias que ensina</label>
-                            <input type="text" placeholder="Ex: Matemática, Cálculo, Física">
+                            <label for="subjects">Matérias que ensina</label>
+                            <input type="text" id="subjects" name="subjects"
+                                placeholder="Ex: Matemática, Cálculo, Física" maxlength="300">
                         </div>
                     </div>
+
                     <div class="form-grid" data-profile-fields="company" style="display:none">
                         <div class="form-group">
-                            <label>CNPJ</label>
-                            <input type="text" placeholder="00.000.000/0000-00">
+                            <label for="cnpj">CNPJ</label>
+                            <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" maxlength="18"
+                                inputmode="numeric">
                         </div>
                         <div class="form-group">
-                            <label>Setor</label>
-                            <input type="text" placeholder="Ex: Tecnologia">
+                            <label for="sector">Setor</label>
+                            <input type="text" id="sector" name="sector" placeholder="Ex: Tecnologia" maxlength="100">
                         </div>
                         <div class="form-group">
-                            <label>Site</label>
-                            <input type="text" placeholder="https://">
+                            <label for="website">Site</label>
+                            <input type="text" id="website" name="website" placeholder="https://" maxlength="255">
                         </div>
                         <div class="form-group">
-                            <label>Tamanho</label>
-                            <input type="text" placeholder="Ex: 10-50 funcionários">
+                            <label for="companySize">Tamanho</label>
+                            <input type="text" id="companySize" name="companySize" placeholder="Ex: 10-50 funcionários"
+                                maxlength="50">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group form-group-full">
+                            <label for="city">Cidade</label>
+                            <input type="text" id="city" name="city" placeholder="Ex: São Paulo" maxlength="120">
                         </div>
                     </div>
 
                     <div class="form-group form-group-full" style="margin-bottom:28px">
-                        <label>Bio / Sobre</label>
-                        <textarea rows="4" placeholder="Conte um pouco sobre você ou sua empresa..."></textarea>
+                        <label for="bio">Bio / Sobre</label>
+                        <textarea id="bio" name="bio" rows="4"
+                            placeholder="Conte um pouco sobre você ou sua empresa..."></textarea>
                     </div>
 
+                    <div class="auth-feedback" id="registerFeedback" role="alert" aria-live="polite" hidden></div>
+
                     <div class="register-footer register-footer-split">
-                        <button class="register-back-btn" data-back>
+                        <button class="register-back-btn" data-back type="button">
                             <i class='bx bx-left-arrow-alt'></i>
                             Voltar
                         </button>
-                        <button class="register-button" data-submit>
+                        <button class="register-button" data-submit type="button">
                             <i class='bx bx-check'></i>
                             Criar conta
                         </button>
@@ -237,19 +261,20 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="footer-logo">
+                    <a href="index.html" class="footer-logo">
                         <div class="footer-logo-icon">
                             <img src="img/marca/logo.png" alt="Logo">
                         </div>
                         <span>UniLink</span>
                     </a>
                     <p>
-                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e oportunidades.
+                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e
+                        oportunidades.
                     </p>
                     <div class="footer-social">
                         <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-instagram' ></i></a>
-                        <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
                         <a href="#"><i class='bx bxl-youtube'></i></a>
                     </div>
                 </div>
@@ -288,6 +313,10 @@
         </div>
     </footer>
     <script src="js/script.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/auth/nav.js"></script>
+    <script src="js/api/client.js"></script>
     <script src="js/auth/register.js"></script>
 </body>
+
 </html>

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre - UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/sobre.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
+
 <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <header id="header">
         <nav class="navbar">
             <a href="index.html" class="logo">
@@ -53,9 +57,10 @@
         </nav>
     </header>
 
-    <main>
+    <main id="conteudo" tabindex="-1">
         <section class="mission-hero">
             <div class="mission-hero-container">
+                <span class="sobre-eyebrow">Sobre nós</span>
                 <h1>Nossa missão</h1>
                 <p>
                     Conectar universitários a alunos e empresas, gerando renda, experiência
@@ -102,12 +107,13 @@
                         <span>UniLink</span>
                     </a>
                     <p>
-                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e oportunidades.
+                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e
+                        oportunidades.
                     </p>
                     <div class="footer-social">
                         <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-instagram' ></i></a>
-                        <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
                         <a href="#"><i class='bx bxl-youtube'></i></a>
                     </div>
                 </div>
@@ -145,6 +151,10 @@
             </div>
         </div>
     </footer>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/auth/nav.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>

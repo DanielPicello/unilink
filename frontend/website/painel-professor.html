@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel do Professor | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
     <link rel="stylesheet" href="css/dashboard/painel.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        document.documentElement.classList.add("panel-guard-pending");
+        setTimeout(function () {
+            document.documentElement.classList.remove("panel-guard-pending");
+        }, 3000);
+    </script>
 </head>
+
 <body class="panel-body">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <aside class="panel-sidebar" id="panelSidebar" data-panel="professor">
         <div class="panel-logo-block">
             <a href="index.html" class="panel-logo">
@@ -19,7 +29,7 @@
         </div>
         <nav class="panel-nav" id="panelNav"></nav>
         <div class="panel-sidebar-bottom">
-            <a href="#" class="panel-nav-link">
+            <a href="configuracoes.html" class="panel-nav-link">
                 <i class='bx bx-cog'></i>
                 <span>Configurações</span>
             </a>
@@ -50,7 +60,7 @@
                 <div class="panel-avatar">PL</div>
             </div>
         </header>
-        <main class="panel-content">
+        <main id="conteudo" tabindex="-1" class="panel-content">
             <section class="panel-hero">
                 <div class="panel-hero-top">
                     <div class="panel-hero-left">
@@ -363,6 +373,9 @@
             </section>
         </main>
     </div>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
     <script src="js/dashboard/painel.js"></script>
 </body>
+
 </html>

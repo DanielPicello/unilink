@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escolha seu Painel | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/dashboard/dashboard.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <header id="header">
         <nav class="navbar">
             <a href="index.html" class="logo">
                 <div class="logo-icon">
                     <img src="img/marca/logo.png" alt="Logo">
                 </div>
-                <span >Uni<span style="color:#2563EB">Link</span></span>
+                <span>Uni<span style="color:#2563EB">Link</span></span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -52,14 +56,27 @@
             </div>
         </nav>
     </header>
-    <main>
+    <main id="conteudo" tabindex="-1">
         <section class="dash-select">
             <div class="dash-container">
+                <div class="dash-user-bar">
+                    <div class="dash-avatar" id="dashAvatar">··</div>
+                    <div class="dash-user-meta">
+                        <strong id="dashUserName">Carregando...</strong>
+                        <span id="dashUserEmail"></span>
+                    </div>
+                    <span class="dash-role-chip" id="dashUserRole"></span>
+                    <button class="dash-logout" id="dashLogout" type="button">
+                        <i class='bx bx-log-out'></i>
+                        Sair
+                    </button>
+                </div>
                 <span class="dash-eyebrow">Escolha seu painel</span>
-                <h1>Qual dashboard você quer abrir?</h1>
-                <p>Cada perfil tem uma experiência dedicada com métricas, agenda e ferramentas específicas.</p>
-                <div class="dash-grid">
-                    <article class="dash-card dash-card-aluno">
+                <h1 id="dashGreeting">Qual dashboard você quer abrir?</h1>
+                <p id="dashSubtitle">Cada perfil tem uma experiência dedicada com métricas, agenda e ferramentas
+                    específicas.</p>
+                <div class="dash-grid" id="dashGrid">
+                    <article class="dash-card dash-card-aluno" data-role="aluno">
                         <div class="dash-card-top">
                             <div class="dash-icon">
                                 <i class='bx bx-user'></i>
@@ -74,7 +91,7 @@
                             </a>
                         </div>
                     </article>
-                    <article class="dash-card dash-card-professor">
+                    <article class="dash-card dash-card-professor" data-role="professor">
                         <div class="dash-card-top">
                             <div class="dash-icon">
                                 <i class='bx bxs-graduation'></i>
@@ -89,7 +106,7 @@
                             </a>
                         </div>
                     </article>
-                    <article class="dash-card dash-card-empresa">
+                    <article class="dash-card dash-card-empresa" data-role="empresa">
                         <div class="dash-card-top">
                             <div class="dash-icon">
                                 <i class='bx bx-briefcase'></i>
@@ -112,19 +129,20 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="footer-logo">
+                    <a href="index.html" class="footer-logo">
                         <div class="footer-logo-icon">
                             <img src="img/marca/logo.png" alt="Logo">
                         </div>
                         <span>UniLink</span>
                     </a>
                     <p>
-                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e oportunidades.
+                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e
+                        oportunidades.
                     </p>
                     <div class="footer-social">
                         <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-instagram' ></i></a>
-                        <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
                         <a href="#"><i class='bx bxl-youtube'></i></a>
                     </div>
                 </div>
@@ -163,6 +181,9 @@
         </div>
     </footer>
     <script src="js/script.js"></script>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
     <script src="js/dashboard/dashboard.js"></script>
 </body>
+
 </html>

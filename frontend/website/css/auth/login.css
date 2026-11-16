@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-.login-section, .login-section *{
-    font-family:'Inter', Arial, Helvetica, sans-serif;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
+.login-section,
+.login-section * {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .login-section {
@@ -82,7 +83,7 @@ form {
     font-size: 1rem;
     color: #475569;
     transition: .2s;
-    box-shadow: 0 2px 5px rgba(0,0,0,.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .05);
 }
 
 .input-group input:focus {
@@ -126,4 +127,114 @@ form {
 
 .register-link a:hover {
     text-decoration: underline;
+}
+
+.auth-feedback {
+    padding: 12px 14px;
+    border-radius: 12px;
+    font-size: .95rem;
+    line-height: 1.45;
+    border: 1px solid transparent;
+}
+
+.auth-feedback.error {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #B91C1C;
+}
+
+.auth-feedback[hidden] {
+    display: none;
+}
+
+.btn-login-form:disabled {
+    opacity: .7;
+    cursor: not-allowed;
+}
+
+.auth-feedback.success {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #15803D;
+}
+
+.auth-feedback.warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #B45309;
+}
+
+@media (max-width: 480px) {
+    .login-section {
+        padding: 96px 14px 56px;
+    }
+
+    .login-card {
+        padding: 26px 20px;
+        border-radius: 18px;
+    }
+
+    .login-card h1 {
+        font-size: 1.75rem;
+    }
+
+    .login-card p {
+        font-size: 1rem;
+        margin-bottom: 24px;
+    }
+
+    form {
+        gap: 18px;
+    }
+
+    .label-row {
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .label-row a {
+        font-size: .88rem;
+    }
+
+    .register-link {
+        margin-top: 26px;
+        font-size: .98rem;
+    }
+}
+
+.password-field {
+    position: relative;
+    display: flex;
+    width: 100%;
+}
+
+.password-field input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    padding-right: 48px;
+}
+
+.password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 10px;
+    background: transparent;
+    color: #64748B;
+    font-size: 20px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.password-toggle:hover {
+    background: #F1F5F9;
+    color: #2563EB;
 }

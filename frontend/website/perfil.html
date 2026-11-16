@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu perfil | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
+    <link rel="stylesheet" href="css/dashboard/painel.css">
+    <link rel="stylesheet" href="css/dashboard/perfil.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        document.documentElement.classList.add("panel-guard-pending");
+        setTimeout(function () {
+            document.documentElement.classList.remove("panel-guard-pending");
+        }, 3000);
+    </script>
+</head>
+
+<body class="panel-body">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <aside class="panel-sidebar" id="panelSidebar">
+        <div class="panel-logo-block">
+            <a href="index.html" class="panel-logo">
+                <div class="panel-logo-icon">
+                    <img src="img/marca/logo.png" alt="Logo">
+                </div>
+                <span class="panel-logo-text">Uni<span>Link</span></span>
+            </a>
+        </div>
+        <nav class="panel-nav" id="panelNav"></nav>
+        <div class="panel-sidebar-bottom">
+            <a href="configuracoes.html" class="panel-nav-link">
+                <i class='bx bx-cog'></i>
+                <span>Configurações</span>
+            </a>
+            <a href="faq.html" class="panel-nav-link">
+                <i class='bx bx-help-circle'></i>
+                <span>Ajuda</span>
+            </a>
+            <a href="login.html" class="panel-nav-link panel-logout">
+                <i class='bx bx-log-out'></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </aside>
+    <div class="panel-overlay" id="panelOverlay"></div>
+    <div class="panel-main">
+        <header class="panel-topbar">
+            <button class="panel-toggle-btn" id="sidebarToggle" aria-label="Abrir/fechar menu">
+                <i class='bx bx-dock-left'></i>
+            </button>
+            <div class="panel-search">
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Buscar aulas, professores, vagas...">
+            </div>
+            <div class="panel-topbar-actions">
+                <button class="panel-icon-btn" aria-label="Notificações">
+                    <i class='bx bx-bell'></i>
+                </button>
+                <div class="panel-avatar" id="topbarAvatar">--</div>
+            </div>
+        </header>
+        <main id="conteudo" tabindex="-1" class="panel-content">
+            <section class="panel-hero">
+                <div class="panel-hero-top">
+                    <div class="panel-hero-left">
+                        <span class="panel-chip">
+                            <i class='bx bx-user-circle'></i>
+                            Conta
+                        </span>
+                        <h1>Meu perfil</h1>
+                        <p>Mantenha seus dados atualizados para aparecer melhor nas buscas.</p>
+                    </div>
+                </div>
+            </section>
+            <div class="perfil-page">
+                <div class="panel-card perfil-account">
+                    <div class="panel-avatar perfil-account-avatar" id="accountAvatar">--</div>
+                    <div class="perfil-account-info">
+                        <strong id="accountName">Carregando...</strong>
+                        <span id="accountEmail"></span>
+                    </div>
+                    <span class="perfil-role" id="accountRole"></span>
+                </div>
+                <form class="panel-card perfil-form" id="formPersonal" novalidate hidden>
+                    <div class="perfil-section-head">
+                        <div>
+                            <h2>Dados básicos</h2>
+                            <p>Como você aparece para outros usuários da plataforma.</p>
+                        </div>
+                        <span class="perfil-section-icon">
+                            <i class='bx bx-user-circle'></i>
+                        </span>
+                    </div>
+                    <div class="perfil-grid">
+                        <div class="perfil-field perfil-field-full">
+                            <label for="personalFullName">Nome completo</label>
+                            <input type="text" id="personalFullName" name="fullName" maxlength="120" autocomplete="name"
+                                placeholder="Ex: Maria Silva">
+                        </div>
+                        <div class="perfil-field perfil-field-full">
+                            <label for="personalBio">Bio</label>
+                            <textarea id="personalBio" name="bio" rows="4" maxlength="1000"
+                                placeholder="Conte um pouco sobre você..."></textarea>
+                        </div>
+                    </div>
+                    <div class="perfil-actions">
+                        <p class="perfil-feedback" id="personalFeedback" hidden role="status"></p>
+                        <button type="submit" class="panel-hero-btn perfil-save">Salvar dados básicos</button>
+                    </div>
+                </form>
+                <form class="panel-card perfil-form" id="formStudent" novalidate hidden>
+                    <div class="perfil-section-head">
+                        <div>
+                            <h2>Perfil de aluno</h2>
+                            <p>Usado por professores para entender seu momento de estudo.</p>
+                        </div>
+                        <span class="perfil-section-icon">
+                            <i class='bx bx-book-open'></i>
+                        </span>
+                    </div>
+                    <div class="perfil-grid">
+                        <div class="perfil-field">
+                            <label for="studentEducationLevel">Nível de ensino</label>
+                            <input type="text" id="studentEducationLevel" name="educationLevel" maxlength="80"
+                                placeholder="Ex: Ensino Médio">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="studentCity">Cidade</label>
+                            <input type="text" id="studentCity" name="city" maxlength="80" placeholder="Ex: São Paulo">
+                        </div>
+                    </div>
+                    <div class="perfil-actions">
+                        <p class="perfil-feedback" id="studentFeedback" hidden role="status"></p>
+                        <button type="submit" class="panel-hero-btn perfil-save">Salvar perfil de aluno</button>
+                    </div>
+                </form>
+                <form class="panel-card perfil-form" id="formTeacher" novalidate hidden>
+                    <div class="perfil-section-head">
+                        <div>
+                            <h2>Perfil de professor</h2>
+                            <p>Estes dados aparecem na busca de professores.</p>
+                        </div>
+                        <span class="perfil-section-icon">
+                            <i class='bx bxs-graduation'></i>
+                        </span>
+                    </div>
+                    <div class="perfil-grid">
+                        <div class="perfil-field">
+                            <label for="teacherUniversity">Universidade</label>
+                            <input type="text" id="teacherUniversity" name="university" maxlength="120"
+                                placeholder="Ex: USP">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="teacherCourse">Curso</label>
+                            <input type="text" id="teacherCourse" name="course" maxlength="120"
+                                placeholder="Ex: Engenharia de Computação">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="teacherPeriod">Período</label>
+                            <input type="text" id="teacherPeriod" name="period" maxlength="50" placeholder="Ex: 5º">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="teacherHourlyRate">Valor por hora (R$)</label>
+                            <input type="text" id="teacherHourlyRate" name="hourlyRate" inputmode="decimal"
+                                placeholder="Ex: 60,00">
+                        </div>
+                        <div class="perfil-field perfil-field-full">
+                            <label for="teacherSubjects">Matérias que ensina</label>
+                            <input type="text" id="teacherSubjects" name="subjects"
+                                placeholder="Ex: Cálculo I, Física, Programação">
+                            <span class="perfil-hint">Separe por vírgula.</span>
+                        </div>
+                        <div class="perfil-field perfil-field-full">
+                            <label for="teacherCity">Cidade</label>
+                            <input type="text" id="teacherCity" name="city" maxlength="80" placeholder="Ex: São Paulo">
+                        </div>
+                    </div>
+                    <div class="perfil-actions">
+                        <p class="perfil-feedback" id="teacherFeedback" hidden role="status"></p>
+                        <button type="submit" class="panel-hero-btn perfil-save">Salvar perfil de professor</button>
+                    </div>
+                </form>
+                <form class="panel-card perfil-form" id="formCompany" novalidate hidden>
+                    <div class="perfil-section-head">
+                        <div>
+                            <h2>Perfil da empresa</h2>
+                            <p>Informações que candidatos veem nas vagas publicadas.</p>
+                        </div>
+                        <span class="perfil-section-icon">
+                            <i class='bx bx-buildings'></i>
+                        </span>
+                    </div>
+                    <div class="perfil-grid">
+                        <div class="perfil-field perfil-field-full">
+                            <label for="companyName">Nome da empresa</label>
+                            <input type="text" id="companyName" name="companyName" maxlength="120"
+                                placeholder="Ex: Innovate">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="companyCnpj">CNPJ</label>
+                            <input type="text" id="companyCnpj" name="cnpj" inputmode="numeric" maxlength="18"
+                                placeholder="00.000.000/0000-00">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="companySector">Setor</label>
+                            <input type="text" id="companySector" name="sector" maxlength="80"
+                                placeholder="Ex: Tecnologia">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="companyWebsite">Site</label>
+                            <input type="text" id="companyWebsite" name="website" maxlength="160"
+                                placeholder="Ex: https://empresa.com.br">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="companySize">Tamanho</label>
+                            <input type="text" id="companySize" name="companySize" maxlength="60"
+                                placeholder="Ex: 10-50 funcionários">
+                        </div>
+                        <div class="perfil-field perfil-field-full">
+                            <label for="companyBio">Sobre a empresa</label>
+                            <textarea id="companyBio" name="bio" rows="4" maxlength="1000"
+                                placeholder="Conte o que a empresa faz e que tipo de talento procura..."></textarea>
+                        </div>
+                        <div class="perfil-field perfil-field-full">
+                            <label for="companyCity">Cidade</label>
+                            <input type="text" id="companyCity" name="city" maxlength="80" placeholder="Ex: São Paulo">
+                        </div>
+                    </div>
+                    <div class="perfil-actions">
+                        <p class="perfil-feedback" id="companyFeedback" hidden role="status"></p>
+                        <button type="submit" class="panel-hero-btn perfil-save">Salvar perfil da empresa</button>
+                    </div>
+                </form>
+                <section class="panel-card perfil-form" id="hybridCard" hidden>
+
+                    <div class="perfil-hybrid-cta" id="hybridCta">
+                        <div class="perfil-hybrid-cta-body">
+                            <span class="perfil-hybrid-cta-icon">
+                                <i class='bx bx-transfer-alt'></i>
+                            </span>
+                            <div>
+                                <h2 id="hybridTitle">Quero ensinar também</h2>
+                                <p id="hybridSubtitle"></p>
+                            </div>
+                        </div>
+                        <button type="button" class="panel-hero-btn perfil-hybrid-start" id="hybridStart"
+                            aria-expanded="false">
+                            <span id="hybridStartLabel">Criar perfil de professor</span>
+                            <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                    </div>
+
+                    <div id="hybridTeacherPanel" hidden>
+                        <div class="perfil-section-head">
+                            <div>
+                                <h2>Novo perfil de professor</h2>
+                                <p>Preencha os dados abaixo. Depois você pode editar tudo em "Meu perfil".</p>
+                            </div>
+                            <span class="perfil-section-icon">
+                                <i class='bx bxs-graduation'></i>
+                            </span>
+                        </div>
+
+                        <form id="formBecomeTeacher" novalidate>
+                            <div class="perfil-grid">
+                                <div class="perfil-field">
+                                    <label for="becomeUniversity">Universidade</label>
+                                    <input type="text" id="becomeUniversity" name="university" maxlength="120"
+                                        placeholder="Ex: USP">
+                                </div>
+                                <div class="perfil-field">
+                                    <label for="becomeCourse">Curso</label>
+                                    <input type="text" id="becomeCourse" name="course" maxlength="120"
+                                        placeholder="Ex: Engenharia de Computação">
+                                </div>
+                                <div class="perfil-field">
+                                    <label for="becomePeriod">Período</label>
+                                    <input type="text" id="becomePeriod" name="period" maxlength="50"
+                                        placeholder="Ex: 5º">
+                                </div>
+                                <div class="perfil-field">
+                                    <label for="becomeHourlyRate">Valor por hora (R$)</label>
+                                    <input type="text" id="becomeHourlyRate" name="hourlyRate" inputmode="decimal"
+                                        placeholder="Ex: 60,00">
+                                </div>
+                                <div class="perfil-field perfil-field-full">
+                                    <label for="becomeSubjects">Matérias que ensina</label>
+                                    <input type="text" id="becomeSubjects" name="subjects"
+                                        placeholder="Ex: Cálculo I, Física, Programação">
+                                    <span class="perfil-hint">Separe por vírgula.</span>
+                                </div>
+                                <div class="perfil-field perfil-field-full">
+                                    <label for="becomeCity">Cidade</label>
+                                    <input type="text" id="becomeCity" name="city" maxlength="80"
+                                        placeholder="Ex: São Paulo">
+                                </div>
+                            </div>
+
+                            <div class="perfil-actions">
+                                <button type="button" class="perfil-btn-ghost" data-hybrid-cancel>Voltar</button>
+                                <p class="perfil-feedback" id="becomeTeacherFeedback" hidden role="status"></p>
+                                <button type="submit" class="panel-hero-btn perfil-save">Criar perfil de
+                                    professor</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="hybridStudentPanel" hidden>
+                        <div class="perfil-section-head">
+                            <div>
+                                <h2>Novo perfil de aluno</h2>
+                                <p>Preencha os dados abaixo. Depois você pode editar tudo em "Meu perfil".</p>
+                            </div>
+                            <span class="perfil-section-icon">
+                                <i class='bx bx-book-open'></i>
+                            </span>
+                        </div>
+
+                        <form id="formBecomeStudent" novalidate>
+                            <div class="perfil-grid">
+                                <div class="perfil-field">
+                                    <label for="becomeEducationLevel">Nível de ensino</label>
+                                    <input type="text" id="becomeEducationLevel" name="educationLevel" maxlength="80"
+                                        placeholder="Ex: Ensino Médio">
+                                </div>
+                                <div class="perfil-field">
+                                    <label for="becomeStudentCity">Cidade</label>
+                                    <input type="text" id="becomeStudentCity" name="city" maxlength="80"
+                                        placeholder="Ex: São Paulo">
+                                </div>
+                            </div>
+
+                            <div class="perfil-actions">
+                                <button type="button" class="perfil-btn-ghost" data-hybrid-cancel>Voltar</button>
+                                <p class="perfil-feedback" id="becomeStudentFeedback" hidden role="status"></p>
+                                <button type="submit" class="panel-hero-btn perfil-save">Criar perfil de
+                                    aluno</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="hybridManage" hidden>
+                        <div class="perfil-section-head">
+                            <div>
+                                <h2>Seus perfis</h2>
+                                <p>Você estuda e ensina na UniLink. Gerencie seus dois perfis abaixo.</p>
+                            </div>
+                            <span class="perfil-section-icon">
+                                <i class='bx bx-transfer-alt'></i>
+                            </span>
+                        </div>
+
+                        <div class="perfil-hybrid-row">
+                            <div class="perfil-hybrid-info">
+                                <strong>
+                                    <i class='bx bxs-graduation'></i>
+                                    Professor
+                                </strong>
+                                <span id="hybridTeacherInfo"></span>
+                            </div>
+                            <button type="button" class="perfil-btn-ghost perfil-btn-small"
+                                data-remove-profile="teacher">
+                                Deixar de ensinar
+                            </button>
+                        </div>
+
+                        <div class="perfil-hybrid-row">
+                            <div class="perfil-hybrid-info">
+                                <strong>
+                                    <i class='bx bx-book-open'></i>
+                                    Aluno
+                                </strong>
+                                <span id="hybridStudentInfo"></span>
+                            </div>
+                            <button type="button" class="perfil-btn-ghost perfil-btn-small"
+                                data-remove-profile="student">
+                                Deixar de estudar
+                            </button>
+                        </div>
+
+                        <p class="perfil-feedback perfil-hybrid-feedback" id="hybridFeedback" hidden role="status"></p>
+                    </div>
+                </section>
+                <div class="panel-card perfil-empty" id="perfilEmpty" hidden>
+                    <i class='bx bx-user-circle'></i>
+                    <h2>Nenhum perfil para editar</h2>
+                    <p>
+                        Sua conta não possui perfil pessoal, de aluno, de professor ou de empresa.
+                        Se isso não parece certo, fale com o suporte.
+                    </p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/dashboard/painel.js"></script>
+    <script src="js/dashboard/conta.js"></script>
+    <script src="js/dashboard/perfil.js"></script>
+</body>
+
+</html>

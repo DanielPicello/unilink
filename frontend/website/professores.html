@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professores | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/marketing/professores.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <header id="header">
         <nav class="navbar">
             <a href="index.html" class="logo">
                 <div class="logo-icon">
                     <img src="img/marca/logo.png" alt="Logo">
                 </div>
-                <span >Uni<span style="color:#2563EB">Link</span></span>
+                <span>Uni<span style="color:#2563EB">Link</span></span>
             </a>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
@@ -51,242 +55,239 @@
             </div>
         </nav>
     </header>
-    <main>
-    <section class="hero-professores">
-        <div class="container">
-            <h1>Encontre o professor ideal</h1>
-            <p>
-                Mais de 8.000 universitários prontos para te ajudar a aprender.
-            </p>
-            <div class="search-box">
-                <i class='bx bx-search'></i>
-                <input
-                    id="pesquisa"
-                    type="text"
-                    placeholder="Buscar por matéria, professor ou universidade..."
-                >
+    <main id="conteudo" tabindex="-1">
+        <section class="hero-professores">
+            <div class="container">
+                <h1>Encontre o professor ideal</h1>
+                <p>
+                    Mais de 8.000 universitários prontos para te ajudar a aprender.
+                </p>
+                <div class="search-box">
+                    <i class='bx bx-search'></i>
+                    <input id="pesquisa" type="text" placeholder="Buscar por matéria, professor ou universidade...">
+                </div>
             </div>
-        </div>
-    </section>
-    <section class="categorias">
-        <div class="container">
-            <button class="filtro" data-filtro="todos">Todos</button>
-            <button class="filtro" data-filtro="matematica">Matemática</button>
-            <button class="filtro" data-filtro="programacao">Programação</button>
-            <button class="filtro" data-filtro="biologia">Biologia</button>
-            <button class="filtro" data-filtro="portugues">Português</button>
-            <button class="filtro" data-filtro="fisica">Física</button>
-            <button class="filtro" data-filtro="quimica">Química</button>
-            <button class="filtro" data-filtro="direito">Direito</button>
-            <button class="filtro" data-filtro="administracao">Administração</button>
-        </div>
-    </section>
-    <section class="professores">
-        <div class="container">
-            <div class="card-professor" data-materia="matematica">
-                <img src="img/professores/teacher-1.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">USP</span>
-                    <h3 class="nome">Mariana Oliveira</h3>
-                    <p class="formacao">Engenharia civil</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>São Paulo</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.9 (128)
+        </section>
+        <section class="categorias">
+            <div class="container">
+                <button class="filtro" data-filtro="todos">Todos</button>
+                <button class="filtro" data-filtro="matematica">Matemática</button>
+                <button class="filtro" data-filtro="programacao">Programação</button>
+                <button class="filtro" data-filtro="biologia">Biologia</button>
+                <button class="filtro" data-filtro="portugues">Português</button>
+                <button class="filtro" data-filtro="fisica">Física</button>
+                <button class="filtro" data-filtro="quimica">Química</button>
+                <button class="filtro" data-filtro="direito">Direito</button>
+                <button class="filtro" data-filtro="administracao">Administração</button>
+            </div>
+        </section>
+        <section class="professores">
+            <div class="container">
+                <div class="card-professor" data-materia="matematica">
+                    <img src="img/professores/teacher-1.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">USP</span>
+                        <h3 class="nome">Mariana Oliveira</h3>
+                        <p class="formacao">Engenharia civil</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>São Paulo</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.9 (128)
+                            </span>
+                            <strong>R$ 70/h</strong>
+                        </div>
+                        <span class="online">
+                            Online
                         </span>
-                        <strong>R$ 70/h</strong>
+                        <a href="#">Ver Perfil</a>
                     </div>
-                    <span class="online">
-                        Online
-                    </span>
-                    <a href="#">Ver Perfil</a>
                 </div>
-            </div>
-            <div class="card-professor" data-materia="programacao">
-                <img src="img/professores/teacher-2.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">UNICAMP</span>
-                    <h3 class="nome">João Pedro Lima</h3>
-                    <p class="formacao">Ciência da Computação</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>Campinas</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.8 (95)
+                <div class="card-professor" data-materia="programacao">
+                    <img src="img/professores/teacher-2.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">UNICAMP</span>
+                        <h3 class="nome">João Pedro Lima</h3>
+                        <p class="formacao">Ciência da Computação</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>Campinas</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.8 (95)
+                            </span>
+                            <strong>R$ 65/h </strong>
+                        </div>
+                        <span class="online">
+                            Online
                         </span>
-                        <strong>R$ 65/h </strong>
+                        <a href="#">Ver Perfil</a>
                     </div>
-                    <span class="online">
-                        Online
-                    </span>
-                    <a href="#">Ver Perfil</a>
                 </div>
-            </div>
-            <div class="card-professor" data-materia="biologia">
-                <img src="img/professores/teacher-3.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">UFRJ</span>
-                    <h3 class="nome">Beatriz Santos</h3>
-                    <p class="formacao">Biologia</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>Rio de Janeiro</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.9 (110)
+                <div class="card-professor" data-materia="biologia">
+                    <img src="img/professores/teacher-3.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">UFRJ</span>
+                        <h3 class="nome">Beatriz Santos</h3>
+                        <p class="formacao">Biologia</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>Rio de Janeiro</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.9 (110)
+                            </span>
+                            <strong>R$ 60/h</strong>
+                        </div>
+                        <span class="presencial">
+                            Presencial
                         </span>
-                        <strong>R$ 60/h</strong>
+                        <a href="#">Ver Perfil</a>
                     </div>
-                    <span class="presencial">
-                        Presencial
-                    </span>
-                    <a href="#">Ver Perfil</a>
                 </div>
-            </div>
-            <div class="card-professor" data-materia="administracao">
-                <img src="img/professores/teacher-4.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">FGV</span>
-                    <h3 class="nome">Lucas Almeida</h3>
-                    <p class="formacao">Administração</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>São Paulo</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.7 (88)
-                        </span> 
-                        <strong>R$ 55/h</strong>
-                    </div>
-                    <span class="online">
-                        Online
-                    </span>
-                    <a href="#">Ver Perfil</a>
-                </div>
-            </div>
-            <div class="card-professor" data-materia="portugues">
-                <img src="img/professores/teacher-1.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">UFMG</span>
-                    <h3 class="nome">Carla Mendes</h3>
-                    <p class="formacao">Letras</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>Belo Horizonte</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.9 (142)
+                <div class="card-professor" data-materia="administracao">
+                    <img src="img/professores/teacher-4.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">FGV</span>
+                        <h3 class="nome">Lucas Almeida</h3>
+                        <p class="formacao">Administração</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>São Paulo</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.7 (88)
+                            </span>
+                            <strong>R$ 55/h</strong>
+                        </div>
+                        <span class="online">
+                            Online
                         </span>
-                        <strong>R$ 50/h</strong>
+                        <a href="#">Ver Perfil</a>
                     </div>
-                    <span class="online">
-                        Online
-                    </span>
-                    <a href="#">Ver Perfil</a>
                 </div>
-            </div>
-            <div class="card-professor" data-materia="fisica">
-                <img src="img/professores/teacher-2.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">USP</span>
-                    <h3 class="nome">Pedro Henrique</h3>
-                    <p class="formacao">Física</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>São Paulo</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.8 (76)
+                <div class="card-professor" data-materia="portugues">
+                    <img src="img/professores/teacher-1.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">UFMG</span>
+                        <h3 class="nome">Carla Mendes</h3>
+                        <p class="formacao">Letras</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>Belo Horizonte</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.9 (142)
+                            </span>
+                            <strong>R$ 50/h</strong>
+                        </div>
+                        <span class="online">
+                            Online
                         </span>
-                        <strong>R$ 75/h</strong>
+                        <a href="#">Ver Perfil</a>
                     </div>
-                    <span class="presencial">
-                        Presencial
-                    </span>
-                    <a href="#">Ver Perfil</a>
                 </div>
-            </div>
-            <div class="card-professor" data-materia="quimica">
-                <img src="img/professores/teacher-3.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">UFSC</span>
-                    <h3 class="nome">Larissa Costa</h3>
-                    <p class="formacao">Química</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>Florianópolis</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.9 (91)
+                <div class="card-professor" data-materia="fisica">
+                    <img src="img/professores/teacher-2.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">USP</span>
+                        <h3 class="nome">Pedro Henrique</h3>
+                        <p class="formacao">Física</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>São Paulo</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.8 (76)
+                            </span>
+                            <strong>R$ 75/h</strong>
+                        </div>
+                        <span class="presencial">
+                            Presencial
                         </span>
-                        <strong>R$ 65/h</strong>
+                        <a href="#">Ver Perfil</a>
                     </div>
-                    <span class="online">
-                        Online
-                    </span>
-                    <a href="#">Ver Perfil</a>
                 </div>
-            </div>
-            <div class="card-professor" data-materia="direito">
-                <img src="img/professores/teacher-4.jpg" alt="Professor">
-                <div class="card-info">
-                    <span class="universidade">PUC-RIO</span>
-                    <h3 class="nome">Bruno Rocha</h3>
-                    <p class="formacao">Direito</p>
-                    <div class="cidade">
-                        <i class='bx bx-map'></i>
-                        <span>Rio de Janeiro</span>
-                    </div>
-                    <div class="avaliacao">
-                        <span>
-                            <i class='bx bxs-star' style="color:#FFC107"></i>
-                            4.7 (64)
+                <div class="card-professor" data-materia="quimica">
+                    <img src="img/professores/teacher-3.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">UFSC</span>
+                        <h3 class="nome">Larissa Costa</h3>
+                        <p class="formacao">Química</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>Florianópolis</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.9 (91)
+                            </span>
+                            <strong>R$ 65/h</strong>
+                        </div>
+                        <span class="online">
+                            Online
                         </span>
-                        <strong>R$ 80/h</strong>
+                        <a href="#">Ver Perfil</a>
                     </div>
-                    <span class="online">
-                        Online
-                    </span>
-                    <a href="#">Ver Perfil</a>
+                </div>
+                <div class="card-professor" data-materia="direito">
+                    <img src="img/professores/teacher-4.jpg" alt="Professor">
+                    <div class="card-info">
+                        <span class="universidade">PUC-RIO</span>
+                        <h3 class="nome">Bruno Rocha</h3>
+                        <p class="formacao">Direito</p>
+                        <div class="cidade">
+                            <i class='bx bx-map'></i>
+                            <span>Rio de Janeiro</span>
+                        </div>
+                        <div class="avaliacao">
+                            <span>
+                                <i class='bx bxs-star' style="color:#FFC107"></i>
+                                4.7 (64)
+                            </span>
+                            <strong>R$ 80/h</strong>
+                        </div>
+                        <span class="online">
+                            Online
+                        </span>
+                        <a href="#">Ver Perfil</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</main>
-<footer class="footer">
+        </section>
+    </main>
+    <footer class="footer">
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="footer-logo">
+                    <a href="index.html" class="footer-logo">
                         <div class="footer-logo-icon">
                             <img src="img/marca/logo.png" alt="Logo">
                         </div>
                         <span>UniLink</span>
                     </a>
                     <p>
-                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e oportunidades.
+                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e
+                        oportunidades.
                     </p>
                     <div class="footer-social">
                         <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-instagram' ></i></a>
-                        <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
                         <a href="#"><i class='bx bxl-youtube'></i></a>
                     </div>
                 </div>
@@ -324,7 +325,11 @@
             </div>
         </div>
     </footer>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/auth/nav.js"></script>
     <script src="js/script.js"></script>
     <script src="js/marketing/professores.js"></script>
 </body>
+
 </html>

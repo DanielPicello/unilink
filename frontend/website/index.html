@@ -1,66 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UniLink | Transforme conhecimento em oportunidades</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
     <link rel="stylesheet" href="css/styles.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
+
 <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
     <div class="scroll-progress" id="scrollProgress"></div>
     <header id="header">
         <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">
-                        <img src="img/marca/logo.png" alt="Logo">
-                    </div>
-                    <span >Uni<span style="color:#2563EB">Link</span></span>
-                </a>
-                <ul class="nav-links">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="img/marca/logo.png" alt="Logo">
+                </div>
+                <span>Uni<span style="color:#2563EB">Link</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="professores.html">Encontrar Professores</a></li>
+                <li><a href="empresas.html">Empresas</a></li>
+                <li><a href="como-funciona.html">Como Funciona</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn-login" onclick="window.location.href='login.html'">
+                    <i class='bx bx-log-in' style='color:#0e0e0e'></i>
+                    Login
+                </button>
+                <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                <i class='bx bx-menu'></i>
+            </button>
+            <div class="mobile-menu" id="mobileMenu">
+                <ul class="mobile-nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="professores.html">Encontrar Professores</a></li>
                     <li><a href="empresas.html">Empresas</a></li>
                     <li><a href="como-funciona.html">Como Funciona</a></li>
                     <li><a href="sobre.html">Sobre</a></li>
                 </ul>
-                <div class="nav-buttons">
+                <div class="mobile-nav-buttons">
                     <button class="btn-login" onclick="window.location.href='login.html'">
-                        <i class='bx bx-log-in' style='color:#0e0e0e'></i>
+                        <i class='bx bx-log-in'></i>
                         Login
                     </button>
                     <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
                 </div>
-                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
-                    <i class='bx bx-menu'></i>
-                </button>
-                <div class="mobile-menu" id="mobileMenu">
-                    <ul class="mobile-nav-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="professores.html">Encontrar Professores</a></li>
-                        <li><a href="empresas.html">Empresas</a></li>
-                        <li><a href="como-funciona.html">Como Funciona</a></li>
-                        <li><a href="sobre.html">Sobre</a></li>
-                    </ul>
-                    <div class="mobile-nav-buttons">
-                        <button class="btn-login" onclick="window.location.href='login.html'">
-                            <i class='bx bx-log-in'></i>
-                            Login
-                        </button>
-                        <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
-                    </div>
-                </div>
-            </nav>
+            </div>
+        </nav>
     </header>
-    <main>
+    <main id="conteudo" tabindex="-1">
         <section class="hero">
             <div class="hero-left">
                 <h1>
                     Transforme <br> conhecimento em <br> <span>oportunidades.</span>
                 </h1>
                 <p>
-                    O UniLink conecta universitários a alunos e empresas, gerando renda, experiência profissional e acesso à educação de qualidade.
+                    O UniLink conecta universitários a alunos e empresas, gerando renda, experiência profissional e
+                    acesso à educação de qualidade.
                 </p>
                 <div class="hero-buttons">
                     <a href="professores.html" class="hero-btn hero-btn-primary">
@@ -68,14 +73,14 @@
                         Encontrar Professor
                     </a>
                     <a href="register.html" class="hero-btn hero-btn-secondary">
-                        <i class='bx bxs-graduation' ></i>
+                        <i class='bx bxs-graduation'></i>
                         Quero Ensinar
                     </a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
                         <div class="icon blue">
-                            <i class='bx bxs-group' ></i>
+                            <i class='bx bxs-group'></i>
                         </div>
                         <div>
                             <h3>+8.000</h3>
@@ -84,7 +89,7 @@
                     </div>
                     <div class="stat">
                         <div class="icon green">
-                            <i class='bx bxs-book-open' ></i>
+                            <i class='bx bxs-book-open'></i>
                         </div>
                         <div>
                             <h3>+3.500</h3>
@@ -93,7 +98,7 @@
                     </div>
                     <div class="stat">
                         <div class="icon orange">
-                            <i class='bx bxs-buildings' ></i>
+                            <i class='bx bxs-buildings'></i>
                         </div>
                         <div>
                             <h3>+500</h3>
@@ -106,7 +111,7 @@
                 <img src="img/student.jpg">
                 <div class="hero-card rating">
                     <small>Avaliação dos alunos</small>
-                    <i class='bx bxs-star' style="color: #FFC107" ></i> 4,8
+                    <i class='bx bxs-star' style="color: #FFC107"></i> 4,8
                     <span>Baseado em 320 avaliações</span>
                 </div>
                 <div class="hero-card price">
@@ -124,7 +129,7 @@
                 </div>
                 <div class="hero-card subject">
                     <div class="badge blue">
-                        <i class='bx bx-book-open' ></i>
+                        <i class='bx bx-book-open'></i>
                     </div>
                     <div>
                         <small>Disciplina</small>
@@ -134,7 +139,7 @@
                 </div>
                 <div class="hero-card lesson">
                     <div class="badge green">
-                        <i class='bx bxs-calendar' ></i>
+                        <i class='bx bxs-calendar'></i>
                     </div>
                     <div>
                         <small>Próxima aula</small>
@@ -338,7 +343,7 @@
                             <i class="fa-regular fa-clock"></i>
                             Prazo: 30 dias
                         </p>
-                        <a href="/empresas.html" class="details-btn">
+                        <a href="empresas.html" class="details-btn">
                             Ver detalhes da oportunidade
                         </a>
                     </article>
@@ -349,9 +354,10 @@
                         Empresas encontram <br> talentos universitários
                     </h2>
                     <p>
-                        Publique oportunidades de projetos, estágios ou freelances e encontre os melhores talentos para impulsionar seus resultados.
+                        Publique oportunidades de projetos, estágios ou freelances e encontre os melhores talentos para
+                        impulsionar seus resultados.
                     </p>
-                    <a href="/login.html" class="publish-btn">
+                    <a href="login.html" class="publish-btn">
                         <i class="fa-regular fa-paper-plane"></i>
                         Publicar oportunidade
                     </a>
@@ -377,7 +383,8 @@
                         <i class='bx bxs-star'></i>
                         <i class='bx bxs-star'></i>
                     </div>
-                    <p>"Encontrei o professor perfeito para Cálculo. Suas aulas me ajudaram a aprender de verdade e melhorar minhas notas."</p>
+                    <p>"Encontrei o professor perfeito para Cálculo. Suas aulas me ajudaram a aprender de verdade e
+                        melhorar minhas notas."</p>
                 </div>
                 <div class="testimonial-card">
                     <i class='bx bxs-quote-alt-left quote-icon'></i>
@@ -395,7 +402,8 @@
                         <i class='bx bxs-star'></i>
                         <i class='bx bxs-star'></i>
                     </div>
-                    <p>"O UniLink mudou minha forma de ensinar. Consigo ajudar mais alunos e ainda gerar uma renda extra incrível."</p>
+                    <p>"O UniLink mudou minha forma de ensinar. Consigo ajudar mais alunos e ainda gerar uma renda extra
+                        incrível."</p>
                 </div>
                 <div class="testimonial-card">
                     <i class='bx bxs-quote-alt-left quote-icon'></i>
@@ -413,7 +421,8 @@
                         <i class='bx bxs-star'></i>
                         <i class='bx bxs-star'></i>
                     </div>
-                    <p>"Encontramos talentos incríveis através da plataforma. O processo é rápido, fácil e muito eficiente."</p>
+                    <p>"Encontramos talentos incríveis através da plataforma. O processo é rápido, fácil e muito
+                        eficiente."</p>
                 </div>
             </div>
         </section>
@@ -463,7 +472,8 @@
                     Pronto para transformar <br> conhecimento em oportunidades?
                 </h2>
                 <p>
-                    Junte-se a milhares de universitários que já estão ensinando, aprendendo e construindo o futuro com o UniLink.
+                    Junte-se a milhares de universitários que já estão ensinando, aprendendo e construindo o futuro com
+                    o UniLink.
                 </p>
             </div>
             <div class="cta-actions">
@@ -482,19 +492,20 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <a href="#" class="footer-logo">
+                    <a href="index.html" class="footer-logo">
                         <div class="footer-logo-icon">
                             <img src="img/marca/logo.png" alt="Logo">
                         </div>
                         <span>UniLink</span>
                     </a>
                     <p>
-                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e oportunidades.
+                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e
+                        oportunidades.
                     </p>
                     <div class="footer-social">
                         <a href="#"><i class='bx bxl-facebook'></i></a>
-                        <a href="#"><i class='bx bxl-instagram' ></i></a>
-                        <a href="#"><i class='bx bxl-linkedin' ></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
                         <a href="#"><i class='bx bxl-youtube'></i></a>
                     </div>
                 </div>
@@ -532,6 +543,10 @@
             </div>
         </div>
     </footer>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/auth/nav.js"></script>
     <script src="js/script.js"></script>
 </body>
+
 </html>

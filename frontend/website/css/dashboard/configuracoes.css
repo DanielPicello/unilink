@@ -1,0 +1,97 @@
+.perfil-danger {
+    border-color: #FECACA;
+}
+
+.perfil-danger .perfil-section-icon {
+    background: #FEF2F2;
+    color: #DC2626;
+}
+
+.perfil-danger .perfil-section-head h2 {
+    color: #B91C1C;
+}
+
+.perfil-danger-text {
+    max-width: 640px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--panel-text);
+}
+
+.perfil-danger-actions {
+    margin-top: 18px;
+}
+
+.perfil-danger-form {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #FEE2E2;
+}
+
+.perfil-btn-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 46px;
+    padding: 0 20px;
+    border: 0;
+    border-radius: 12px;
+    background: #DC2626;
+    color: #fff;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: .2s;
+}
+
+.perfil-btn-danger:hover {
+    background: #B91C1C;
+}
+
+.perfil-btn-danger:disabled {
+    opacity: .65;
+    cursor: not-allowed;
+}
+
+.perfil-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 46px;
+    padding: 0 20px;
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    background: #fff;
+    color: #475569;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.perfil-btn-ghost:hover {
+    background: #F1F5F9;
+}
+
+.perfil-cancel {
+    margin-left: auto;
+}
+
+@media (max-width: 768px) {
+    .perfil-cancel {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .perfil-danger-actions .perfil-btn-danger,
+    .perfil-danger-form .perfil-actions .perfil-btn-danger,
+    .perfil-danger-form .perfil-actions .perfil-btn-ghost {
+        width: 100%;
+        justify-content: center;
+    }
+}

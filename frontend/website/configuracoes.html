@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
+    <link rel="stylesheet" href="css/dashboard/painel.css">
+    <link rel="stylesheet" href="css/dashboard/perfil.css">
+    <link rel="stylesheet" href="css/dashboard/configuracoes.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        document.documentElement.classList.add("panel-guard-pending");
+        setTimeout(function () {
+            document.documentElement.classList.remove("panel-guard-pending");
+        }, 3000);
+    </script>
+</head>
+
+<body class="panel-body">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <aside class="panel-sidebar" id="panelSidebar">
+        <div class="panel-logo-block">
+            <a href="index.html" class="panel-logo">
+                <div class="panel-logo-icon">
+                    <img src="img/marca/logo.png" alt="Logo">
+                </div>
+                <span class="panel-logo-text">Uni<span>Link</span></span>
+            </a>
+        </div>
+        <nav class="panel-nav" id="panelNav"></nav>
+        <div class="panel-sidebar-bottom">
+            <a href="configuracoes.html" class="panel-nav-link active">
+                <i class='bx bx-cog'></i>
+                <span>Configurações</span>
+            </a>
+            <a href="faq.html" class="panel-nav-link">
+                <i class='bx bx-help-circle'></i>
+                <span>Ajuda</span>
+            </a>
+            <a href="login.html" class="panel-nav-link panel-logout">
+                <i class='bx bx-log-out'></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </aside>
+    <div class="panel-overlay" id="panelOverlay"></div>
+
+    <div class="panel-main">
+        <header class="panel-topbar">
+            <button class="panel-toggle-btn" id="sidebarToggle" aria-label="Abrir/fechar menu">
+                <i class='bx bx-dock-left'></i>
+            </button>
+            <div class="panel-search">
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Buscar aulas, professores, vagas...">
+            </div>
+            <div class="panel-topbar-actions">
+                <button class="panel-icon-btn" aria-label="Notificações">
+                    <i class='bx bx-bell'></i>
+                </button>
+                <div class="panel-avatar" id="topbarAvatar">--</div>
+            </div>
+        </header>
+
+        <main id="conteudo" tabindex="-1" class="panel-content">
+            <section class="panel-hero">
+                <div class="panel-hero-top">
+                    <div class="panel-hero-left">
+                        <span class="panel-chip">
+                            <i class='bx bx-cog'></i>
+                            Conta
+                        </span>
+                        <h1>Configurações</h1>
+                        <p>Gerencie a senha e a segurança da sua conta.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="perfil-page">
+
+                <div class="panel-card perfil-account">
+                    <div class="panel-avatar perfil-account-avatar" id="accountAvatar">--</div>
+                    <div class="perfil-account-info">
+                        <strong id="accountName">Carregando...</strong>
+                        <span id="accountEmail"></span>
+                    </div>
+                    <span class="perfil-role" id="accountRole"></span>
+                </div>
+
+                <form class="panel-card perfil-form" id="formPassword" novalidate>
+                    <div class="perfil-section-head">
+                        <div>
+                            <h2>Alterar senha</h2>
+                            <p>Use pelo menos 8 caracteres e não repita a senha atual.</p>
+                        </div>
+                        <span class="perfil-section-icon">
+                            <i class='bx bx-lock-alt'></i>
+                        </span>
+                    </div>
+
+                    <div class="perfil-grid">
+                        <div class="perfil-field perfil-field-full">
+                            <label for="currentPassword">Senha atual</label>
+                            <input type="password" id="currentPassword" name="currentPassword"
+                                autocomplete="current-password" placeholder="Sua senha atual">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="newPassword">Nova senha</label>
+                            <input type="password" id="newPassword" name="newPassword" autocomplete="new-password"
+                                placeholder="Mínimo 8 caracteres">
+                        </div>
+                        <div class="perfil-field">
+                            <label for="confirmPassword">Confirmar nova senha</label>
+                            <input type="password" id="confirmPassword" name="confirmPassword"
+                                autocomplete="new-password" placeholder="Repita a nova senha">
+                        </div>
+                    </div>
+
+                    <div class="perfil-actions">
+                        <p class="perfil-feedback" id="passwordFeedback" hidden role="status"></p>
+                        <button type="submit" class="panel-hero-btn perfil-save">Atualizar senha</button>
+                    </div>
+                </form>
+
+                <section class="panel-card perfil-form perfil-danger">
+                    <div class="perfil-section-head">
+                        <div>
+                            <h2>Zona de perigo</h2>
+                            <p>Excluir a conta é permanente.</p>
+                        </div>
+                        <span class="perfil-section-icon">
+                            <i class='bx bx-error-circle'></i>
+                        </span>
+                    </div>
+
+                    <p class="perfil-danger-text">
+                        Ao excluir sua conta, seu perfil pessoal, perfil de aluno, perfil de professor,
+                        matérias e perfil da empresa são apagados em definitivo. Não há como recuperar depois.
+                    </p>
+
+                    <div class="perfil-danger-actions" id="deleteActions">
+                        <button type="button" class="perfil-btn-danger" id="revealDelete">
+                            <i class='bx bx-trash'></i>
+                            Excluir minha conta
+                        </button>
+                    </div>
+
+                    <form class="perfil-danger-form" id="formDelete" novalidate hidden>
+                        <div class="perfil-grid">
+                            <div class="perfil-field">
+                                <label for="deletePassword">Senha atual</label>
+                                <input type="password" id="deletePassword" name="currentPassword"
+                                    autocomplete="current-password" placeholder="Sua senha atual">
+                            </div>
+                            <div class="perfil-field">
+                                <label for="deleteConfirmation">Digite EXCLUIR para confirmar</label>
+                                <input type="text" id="deleteConfirmation" name="confirmation" autocomplete="off"
+                                    placeholder="EXCLUIR">
+                            </div>
+                        </div>
+
+                        <div class="perfil-actions">
+                            <p class="perfil-feedback" id="deleteFeedback" hidden role="status"></p>
+                            <button type="button" class="perfil-btn-ghost perfil-cancel" id="cancelDelete">
+                                Cancelar
+                            </button>
+                            <button type="submit" class="perfil-btn-danger">
+                                <i class='bx bx-trash'></i>
+                                Excluir definitivamente
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/dashboard/painel.js"></script>
+    <script src="js/dashboard/conta.js"></script>
+    <script src="js/dashboard/configuracoes.js"></script>
+</body>
+
+</html>

@@ -1,159 +1,166 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login | UniLink</title>
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/auth/login.css">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
-    <body>
-        <header id="header">
-           <nav class="navbar">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">
-                        <img src="img/marca/logo.png" alt="Logo">
-                    </div>
-                    <span >Uni<span style="color:#2563EB">Link</span></span>
-                </a>
-                <ul class="nav-links">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/auth/login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header id="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="img/marca/logo.png" alt="Logo">
+                </div>
+                <span>Uni<span style="color:#2563EB">Link</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="professores.html">Encontrar Professores</a></li>
+                <li><a href="empresas.html">Empresas</a></li>
+                <li><a href="como-funciona.html">Como Funciona</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn-login" onclick="window.location.href='login.html'">
+                    <i class='bx bx-log-in' style='color:#0e0e0e'></i>
+                    Login
+                </button>
+                <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                <i class='bx bx-menu'></i>
+            </button>
+            <div class="mobile-menu" id="mobileMenu">
+                <ul class="mobile-nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="professores.html">Encontrar Professores</a></li>
                     <li><a href="empresas.html">Empresas</a></li>
                     <li><a href="como-funciona.html">Como Funciona</a></li>
                     <li><a href="sobre.html">Sobre</a></li>
                 </ul>
-                <div class="nav-buttons">
+                <div class="mobile-nav-buttons">
                     <button class="btn-login" onclick="window.location.href='login.html'">
-                        <i class='bx bx-log-in' style='color:#0e0e0e'></i>
+                        <i class='bx bx-log-in'></i>
                         Login
                     </button>
                     <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
                 </div>
-                <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
-                    <i class='bx bx-menu'></i>
-                </button>
-                <div class="mobile-menu" id="mobileMenu">
-                    <ul class="mobile-nav-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="professores.html">Encontrar Professores</a></li>
-                        <li><a href="empresas.html">Empresas</a></li>
-                        <li><a href="como-funciona.html">Como Funciona</a></li>
-                        <li><a href="sobre.html">Sobre</a></li>
-                    </ul>
-                    <div class="mobile-nav-buttons">
-                        <button class="btn-login" onclick="window.location.href='login.html'">
-                            <i class='bx bx-log-in'></i>
-                            Login
-                        </button>
-                        <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <main>
-            <section class="login-section">
-                <div class="login-container">
-                    <div class="login-card">
-                        <h1>Bem-vindo de volta</h1>
-                        <p>
-                            Acesse sua conta UniLink.
-                        </p>
-                        <form onsubmit="window.location.href='dashboard.html'; return false;">
-                            <div class="input-group">
-                                <label for="email">
-                                    E-mail
-                                </label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="voce@exemplo.com"
-                                >
-                            </div>
-                            <div class="input-group">
-                                <div class="label-row">
-                                    <label for="senha">
-                                        Senha
-                                    </label>
-                                    <a href="#">
-                                        Esqueci minha senha
-                                    </a>
-                                </div>
-                                <input
-                                    type="password"
-                                    id="senha"
-                                    placeholder="Digite sua senha"
-                                >
-                            </div>
-                            <button  type="submit" class="btn-login-form">
-                                Entrar
-                            </button>
-                        </form>
-                        <p class="register-link">
-                            Ainda não possui uma conta?
-                            <a href="register.html">
-                                Cadastre-se
-                            </a>
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <footer class="footer">
-            <div class="footer-container">
-                <div class="footer-top">
-                    <div class="footer-brand">
-                        <a href="#" class="footer-logo">
-                            <div class="footer-logo-icon">
-                                <img src="img/marca/logo.png" alt="Logo">
-                            </div>
-                            <span>UniLink</span>
-                        </a>
-                        <p>
-                            Conectando universitários, alunos e empresas para um futuro com mais conhecimento e oportunidades.
-                        </p>
-                        <div class="footer-social">
-                            <a href="#"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-instagram' ></i></a>
-                            <a href="#"><i class='bx bxl-linkedin' ></i></a>
-                            <a href="#"><i class='bx bxl-youtube'></i></a>
-                        </div>
-                    </div>
-                    <div class="footer-links">
-                        <h4>Navegação</h4>
-                        <a href="index.html">Home</a>
-                        <a href="professores.html">Encontrar Professores</a>
-                        <a href="empresas.html">Empresas</a>
-                        <a href="como-funciona.html">Como Funciona</a>
-                        <a href="sobre.html">Sobre</a>
-                    </div>
-                    <div class="footer-links">
-                        <h4>Para usuários</h4>
-                        <a href="register.html">Cadastrar-se</a>
-                        <a href="login.html">Login</a>
-                        <a href="faq.html">Perguntas Frequentes</a>
-                    </div>
-                    <div class="footer-links">
-                        <h4>Para empresas</h4>
-                        <a href="#">Publicar oportunidade</a>
-                        <a href="#">Planos e preços</a>
-                        <a href="#">Como contratar</a>
-                        <a href="#">Fale com vendas</a>
-                    </div>
-                </div>
-                <div class="footer-bottom">
+            </div>
+        </nav>
+    </header>
+    <main id="conteudo" tabindex="-1">
+        <section class="login-section">
+            <div class="login-container">
+                <div class="login-card">
+                    <h1>Bem-vindo de volta</h1>
                     <p>
-                        © 2026 UniLink. Todos os direitos reservados.
+                        Acesse sua conta UniLink.
                     </p>
-                    <p>
-                        Feito com
-                        <i class='bx bx-heart'></i>
-                        para transformar vidas através da educação.
+                    <form id="loginForm" novalidate>
+                        <div class="input-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="voce@exemplo.com"
+                                autocomplete="email" required>
+                        </div>
+                        <div class="input-group">
+                            <div class="label-row">
+                                <label for="senha">Senha</label>
+                                <a href="faq.html">Esqueci minha senha</a>
+                            </div>
+                            <div class="password-field">
+                                <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
+                                    autocomplete="current-password" required>
+                                <button type="button" class="password-toggle" data-toggle-password="senha"
+                                    aria-label="Mostrar senha" aria-pressed="false">
+                                    <i class='bx bx-show' aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="auth-feedback" id="loginFeedback" role="alert" aria-live="polite" hidden></div>
+
+                        <button type="submit" class="btn-login-form" id="loginSubmit">
+                            Entrar
+                        </button>
+                    </form>
+                    <p class="register-link">
+                        Ainda não possui uma conta?
+                        <a href="register.html">
+                            Cadastre-se
+                        </a>
                     </p>
                 </div>
             </div>
-        </footer>
-        <script src="js/script.js"></script>
-    </body>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <img src="img/marca/logo.png" alt="Logo">
+                        </div>
+                        <span>UniLink</span>
+                    </a>
+                    <p>
+                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e
+                        oportunidades.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#"><i class='bx bxl-youtube'></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <a href="index.html">Home</a>
+                    <a href="professores.html">Encontrar Professores</a>
+                    <a href="empresas.html">Empresas</a>
+                    <a href="como-funciona.html">Como Funciona</a>
+                    <a href="sobre.html">Sobre</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Para usuários</h4>
+                    <a href="register.html">Cadastrar-se</a>
+                    <a href="login.html">Login</a>
+                    <a href="faq.html">Perguntas Frequentes</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Para empresas</h4>
+                    <a href="#">Publicar oportunidade</a>
+                    <a href="#">Planos e preços</a>
+                    <a href="#">Como contratar</a>
+                    <a href="#">Fale com vendas</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    © 2026 UniLink. Todos os direitos reservados.
+                </p>
+                <p>
+                    Feito com
+                    <i class='bx bx-heart'></i>
+                    para transformar vidas através da educação.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/auth/login.js"></script>
+    <script src="js/auth/nav.js"></script>
+</body>
+
 </html>
