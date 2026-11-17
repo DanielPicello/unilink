@@ -129,26 +129,38 @@
                     <p class="register-subtitle">
                         Vamos criar sua conta.
                     </p>
-                    <div class="form-group">
-                        <label for="password">Senha</label>
-                        <div class="password-field">
-                            <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres"
-                                autocomplete="new-password">
-                            <button type="button" class="password-toggle" data-toggle-password="password"
-                                aria-label="Mostrar senha" aria-pressed="false">
-                                <i class='bx bx-show' aria-hidden="true"></i>
-                            </button>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName" data-field="name-label">Nome completo</label>
+                            <input type="text" id="fullName" name="fullName" data-field="name-input"
+                                placeholder="Ex: Maria Silva" maxlength="150" autocomplete="name">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirmar senha</label>
-                        <div class="password-field">
-                            <input type="password" id="confirmPassword" name="confirmPassword"
-                                placeholder="Repita a senha" autocomplete="new-password">
-                            <button type="button" class="password-toggle" data-toggle-password="confirmPassword"
-                                aria-label="Mostrar senha" aria-pressed="false">
-                                <i class='bx bx-show' aria-hidden="true"></i>
-                            </button>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" name="email" placeholder="voce@exemplo.com" maxlength="255"
+                                autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <div class="password-field">
+                                <input type="password" id="password" name="password" placeholder="Mínimo 8 caracteres"
+                                    autocomplete="new-password">
+                                <button type="button" class="password-toggle" data-toggle-password="password"
+                                    aria-label="Mostrar senha" aria-pressed="false">
+                                    <i class='bx bx-show' aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmar senha</label>
+                            <div class="password-field">
+                                <input type="password" id="confirmPassword" name="confirmPassword"
+                                    placeholder="Repita a senha" autocomplete="new-password">
+                                <button type="button" class="password-toggle" data-toggle-password="confirmPassword"
+                                    aria-label="Mostrar senha" aria-pressed="false">
+                                    <i class='bx bx-show' aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="auth-feedback" id="step2Feedback" role="alert" aria-live="polite" hidden></div>
