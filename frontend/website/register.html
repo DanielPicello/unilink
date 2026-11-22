@@ -248,8 +248,27 @@
                         <textarea id="bio" name="bio" rows="4"
                             placeholder="Conte um pouco sobre você ou sua empresa..."></textarea>
                     </div>
+                    <div class="form-group form-group-full">
+                        <label>Foto de perfil (opcional)</label>
+                        <div class="photo-upload">
+                            <input type="file" id="registerPhoto" accept="image/jpeg,image/png" hidden>
+                            <button type="button" class="photo-upload-pick" id="photoPickBtn">
+                                <i class='bx bx-image-add'></i>
+                                <span id="photoPickLabel">Escolher foto</span>
+                            </button>
+                            <img class="photo-upload-preview" id="photoPreview" alt="Prévia da foto" hidden>
+                            <button type="button" class="photo-upload-remove" id="photoRemoveBtn"
+                                aria-label="Remover foto selecionada" hidden>
+                                <i class='bx bx-x'></i>
+                            </button>
+                        </div>
+                        <small class="register-hint" id="photoUploadHint">
+                            JPEG ou PNG, até 5 MB. Você pode adicionar depois.
+                        </small>
+                    </div>
 
                     <div class="auth-feedback" id="registerFeedback" role="alert" aria-live="polite" hidden></div>
+                    <div class="auth-feedback error" id="photoFeedback" role="alert" aria-live="polite" hidden></div>
 
                     <div class="register-footer register-footer-split">
                         <button class="register-back-btn" data-back type="button">
@@ -261,6 +280,10 @@
                             Criar conta
                         </button>
                     </div>
+                    <a class="register-skip-link" id="registerContinueLink" href="#" hidden>
+                        Ir para meu painel sem foto
+                        <i class='bx bx-right-arrow-alt'></i>
+                    </a>
                 </div>
             </div>
             <p class="register-login">

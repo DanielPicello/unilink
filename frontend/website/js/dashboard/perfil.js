@@ -1,4 +1,4 @@
-const perfilState = { user: null };
+const perfilState = { user: null, photoUrl: "" };
 
 const dirtyForms = new Set();
 
@@ -540,7 +540,7 @@ async function refreshUser() {
         return;
     }
 
-    renderHeader(perfilState.user);
+    await renderHeader(perfilState.user);
     applyVisibility(perfilState.user);
     renderHybrid(perfilState.user);
 }
@@ -554,9 +554,11 @@ async function initPerfil() {
     }
 
     perfilState.user = user;
+    await renderHeader(user);
+    perfilState.photoUrl = await loadProfilePhoto();
+    renderPhotoControls();
 
     renderShell(user);
-    renderHeader(user);
     fillForms(user);
     applyVisibility(user);
     renderHybrid(user);
@@ -564,8 +566,103 @@ async function initPerfil() {
     releasePanelGuard();
 }
 
+function renderPhotoControls() {
+    const hasPhoto = Boolean(perfilState.photoUrl);
+    document.getElementById("photoChangeLabel").textContent = hasPhoto ? "Trocar foto" : "Adicionar foto";
+    document.getElementById("photoRemoveBtn").hidden = !hasPhoto;
+}
+
+function photoFeedback(message, type = "success") {
+    const element = document.getElementById("photoFeedback");
+    if (!element) return;
+
+    if (!message) {
+        clearFeedback(element);
+        return;
+    }
+
+    setFeedback(element, message, type);
+}
+
+async function syncPhotoUI(photoUrl) {
+    perfilState.photoUrl = photoUrl;
+    await renderHeader(perfilState.user);
+    renderPhotoControls();
+}
+
+function bindPhoto() {
+    const input = document.getElementById("photoInput");
+    const changeBtn = document.getElementById("photoChangeBtn");
+    const removeBtn = document.getElementById("photoRemoveBtn");
+
+    if (!input || !changeBtn || !removeBtn) return;
+
+    changeBtn.addEventListener("click", () => input.click());
+
+    input.addEventListener("change", async () => {
+        const file = input.files?.[0];
+        input.value = "";
+
+        const invalid = validateProfilePhoto(file);
+        if (invalid) {
+            photoFeedback(invalid, "error");
+            return;
+        }
+
+        changeBtn.disabled = true;
+        removeBtn.disabled = true;
+        photoFeedback("Enviando foto...");
+
+        try {
+            await saveProfilePhoto(file);
+            await syncPhotoUI(await refreshProfilePhoto());
+            photoFeedback("Foto atualizada.");
+        } catch (error) {
+            if (error instanceof ApiError && error.status === 401) {
+                redirectToLogin({ expired: true });
+                return;
+            }
+            photoFeedback(error.message || "Não foi possível salvar a foto.", "error");
+        } finally {
+            changeBtn.disabled = false;
+            removeBtn.disabled = false;
+        }
+    });
+
+    removeBtn.addEventListener("click", async () => {
+        const confirmed = await openConfirm({
+            title: "Remover foto?",
+            message: "Seu avatar voltará a mostrar as iniciais. Você pode adicionar outra depois.",
+            confirmLabel: "Remover foto",
+            cancelLabel: "Cancelar",
+            danger: true,
+            icon: "bx-trash",
+        });
+        if (!confirmed) return;
+
+        changeBtn.disabled = true;
+        removeBtn.disabled = true;
+
+        try {
+            await deleteProfilePhoto();
+            await syncPhotoUI(await refreshProfilePhoto());
+            photoFeedback("Foto removida.");
+        } catch (error) {
+            if (error instanceof ApiError && error.status === 401) {
+                redirectToLogin({ expired: true });
+                return;
+            }
+            photoFeedback(error.message || "Não foi possível remover a foto.", "error");
+        } finally {
+            changeBtn.disabled = false;
+            removeBtn.disabled = false;
+        }
+    });
+}
+
 bindForms();
 bindHybrid();
+bindPhoto();
 initPerfil();
 
 window.addEventListener("beforeunload", (event) => {

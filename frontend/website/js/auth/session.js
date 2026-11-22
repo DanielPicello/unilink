@@ -234,3 +234,58 @@ function trapFocus(container, event) {
         first.focus();
     }
 }
+
+const PHOTO_DATA_URL = /^data:image\/(png|jpeg);base64,[A-Za-z0-9+/=]+$/;
+
+let profilePhotoPromise = null;
+
+function safePhotoDataUrl(value) {
+    const text = String(value ?? "");
+    return PHOTO_DATA_URL.test(text) ? text : "";
+}
+
+function loadProfilePhoto() {
+    if (!profilePhotoPromise) {
+        profilePhotoPromise = getProfilePhoto()
+            .then((data) => safePhotoDataUrl(data?.photo))
+            .catch((error) => {
+                if (!(error instanceof ApiError && error.status === 404)) {
+                    console.error("Falha ao carregar a foto de perfil:", error);
+                }
+                return "";
+            });
+    }
+    return profilePhotoPromise;
+}
+
+function refreshProfilePhoto() {
+    profilePhotoPromise = null;
+    return loadProfilePhoto();
+}
+
+function applyAvatarPhoto(element, name, photoUrl) {
+    if (!element) return;
+
+    element.textContent = "";
+    element.classList.toggle("has-photo", Boolean(photoUrl));
+
+    if (photoUrl) {
+        const img = document.createElement("img");
+        img.src = photoUrl;
+        img.alt = `Foto de ${name}`;
+        element.appendChild(img);
+        return;
+    }
+
+    element.textContent = initials(name);
+}
+
+const PHOTO_MAX_BYTES = 5 * 1024 * 1024;
+const PHOTO_TYPES = ["image/jpeg", "image/png"];
+
+function validateProfilePhoto(file) {
+    if (!file) return "Selecione uma imagem.";
+    if (!PHOTO_TYPES.includes(file.type)) return "Use uma imagem JPEG ou PNG.";
+    if (file.size > PHOTO_MAX_BYTES) return "A imagem deve ter no máximo 5 MB.";
+    return "";
+}

@@ -83,6 +83,24 @@
                     </div>
                     <span class="perfil-role" id="accountRole"></span>
                 </div>
+                <div class="panel-card perfil-photo-card">
+                    <div class="perfil-photo-copy">
+                        <h2>Foto de perfil</h2>
+                        <p>JPEG ou PNG, até 5 MB. A foto aparece no perfil e no topbar.</p>
+                        <p class="perfil-feedback" id="photoFeedback" hidden role="status"></p>
+                    </div>
+                    <div class="perfil-photo-actions">
+                        <input type="file" id="photoInput" accept="image/jpeg,image/png" hidden>
+                        <button type="button" class="panel-hero-btn" id="photoChangeBtn">
+                            <i class='bx bx-image-add'></i>
+                            <span id="photoChangeLabel">Adicionar foto</span>
+                        </button>
+                        <button type="button" class="perfil-btn-ghost" id="photoRemoveBtn" hidden>
+                            <i class='bx bx-trash'></i>
+                            Remover
+                        </button>
+                    </div>
+                </div>
                 <form class="panel-card perfil-form" id="formPersonal" novalidate hidden>
                     <div class="perfil-section-head">
                         <div>

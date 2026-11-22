@@ -63,20 +63,21 @@ function renderShell(user) {
     renderHeroAction(panels);
 }
 
-function renderHeader(user) {
+async function renderHeader(user) {
     const name = displayName(user);
-    const avatar = initials(name);
+    const photoUrl = await loadProfilePhoto();
 
     const topbarAvatar = document.getElementById("topbarAvatar");
-    topbarAvatar.textContent = avatar;
+    applyAvatarPhoto(topbarAvatar, name, photoUrl);
     topbarAvatar.title = user.email;
 
-    document.getElementById("accountAvatar").textContent = avatar;
+    applyAvatarPhoto(document.getElementById("accountAvatar"), name, photoUrl);
+
     document.getElementById("accountName").textContent = name;
     document.getElementById("accountEmail").textContent = user.email;
     document.getElementById("accountRole").textContent = roleLabel(user.role);
 
-    renderTopbarMenu(user);
+    renderTopbarMenu(user, photoUrl);
 }
 
 function setFeedback(element, message, type) {

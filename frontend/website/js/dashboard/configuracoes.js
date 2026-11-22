@@ -168,7 +168,7 @@ async function initConfiguracoes() {
     configState.user = user;
 
     renderShell(user);
-    renderHeader(user);
+    await renderHeader(user);
 
     releasePanelGuard();
 }

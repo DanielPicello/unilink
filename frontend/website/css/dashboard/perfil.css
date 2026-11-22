@@ -559,3 +559,36 @@ body.confirm-open {
         padding: 14px;
     }
 }
+
+.perfil-photo-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.perfil-photo-copy h2 {
+    margin: 0 0 4px;
+    font-size: 1rem;
+    color: var(--panel-title);
+}
+
+.perfil-photo-copy p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--panel-text);
+}
+
+.perfil-photo-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+    .perfil-photo-card {
+        align-items: flex-start;
+    }
+}

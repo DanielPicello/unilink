@@ -32,10 +32,11 @@ function applySubtitle(visiblePanels) {
     }
 }
 
-function renderUser(user, visiblePanels) {
+async function renderUser(user, visiblePanels) {
     const name = displayName(user);
 
-    dashAvatar.textContent = initials(name);
+    const photoUrl = await loadProfilePhoto();
+    applyAvatarPhoto(dashAvatar, name, photoUrl);
     dashAvatar.title = user.email;
     dashUserName.textContent = name;
     dashUserEmail.textContent = user.email;
@@ -88,7 +89,7 @@ async function initDashboard() {
         return;
     }
 
-    renderUser(user, visiblePanels);
+    await renderUser(user, visiblePanels);
 }
 
 if (dashLogout) {

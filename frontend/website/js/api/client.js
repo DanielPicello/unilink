@@ -9,11 +9,13 @@ class ApiError extends Error {
 }
 
 async function apiRequest(path, { method = "GET", body } = {}) {
+    const isFormData = typeof FormData !== "undefined" && body instanceof FormData;
+
     const response = await fetch(`${API_BASE}${path}`, {
         method,
         credentials: "include",
-        headers: body ? { "Content-Type": "application/json" } : undefined,
-        body: body ? JSON.stringify(body) : undefined,
+        headers: body && !isFormData ? { "Content-Type": "application/json" } : undefined,
+        body: isFormData ? body : body ? JSON.stringify(body) : undefined,
     });
 
     if (response.status === 204) return null;
@@ -59,6 +61,20 @@ function registerCompany(payload) {
 
 function getCurrentUser() {
     return apiRequest("/auth/me");
+}
+
+function getProfilePhoto() {
+    return apiRequest("/profile/photo");
+}
+
+function saveProfilePhoto(file) {
+    const formData = new FormData();
+    formData.append("photo", file);
+    return apiRequest("/profile/photo", { method: "PUT", body: formData });
+}
+
+function deleteProfilePhoto() {
+    return apiRequest("/profile/photo", { method: "DELETE" });
 }
 
 function logout() {

@@ -188,15 +188,19 @@ function topbarPanelType() {
     return document.getElementById("panelSidebar")?.dataset.panel ?? "";
 }
 
-function userMenuMarkup(user) {
+function userMenuMarkup(user, photoUrl = "") {
     const name = displayName(user);
     const panels = panelsForRole(user.role);
+    const safePhoto = safePhotoDataUrl(photoUrl);
 
     return `
-        <div class="panel-user-head">
-            <strong id="panelUserName">${escapePanelText(name)}</strong>
-            <span id="panelUserEmail">${escapePanelText(user.email)}</span>
-            <span class="panel-user-role" id="panelUserRole">${escapePanelText(roleLabel(user.role))}</span>
+        <div class="panel-user-head ${safePhoto ? "has-photo" : ""}">
+            ${safePhoto ? `<img class="panel-user-photo" src="${safePhoto}" alt="">` : ""}
+            <div class="panel-user-head-text">
+                <strong id="panelUserName">${escapePanelText(name)}</strong>
+                <span id="panelUserEmail">${escapePanelText(user.email)}</span>
+                <span class="panel-user-role" id="panelUserRole">${escapePanelText(roleLabel(user.role))}</span>
+            </div>
         </div>
 
         <a class="panel-user-item" href="perfil.html">
@@ -251,7 +255,7 @@ function bindTopbarMenu(trigger, menu) {
     });
 }
 
-function renderTopbarMenu(user) {
+function renderTopbarMenu(user, photoUrl = "") {
     const avatar = document.querySelector(".panel-avatar");
     if (!avatar) return;
 
@@ -288,7 +292,7 @@ function renderTopbarMenu(user) {
 
     if (!menu) return;
 
-    menu.innerHTML = userMenuMarkup(user);
+    menu.innerHTML = userMenuMarkup(user, photoUrl);
 
     menu.querySelector("#panelUserLogout").addEventListener("click", () => {
         if (typeof clearPerfilDirty === "function") clearPerfilDirty();
@@ -384,6 +388,8 @@ async function initPanelSession() {
     const user = await requirePanel(panelType);
     if (!user) return;
 
+    const photoUrl = await loadProfilePhoto();
+
     rememberPanel(panelType);
 
     const panels = panelsForRole(user.role);
@@ -402,11 +408,11 @@ async function initPanelSession() {
     const heroTitle = document.querySelector(".panel-hero-left h1");
 
     if (avatar) {
-        avatar.textContent = initials(name);
+        applyAvatarPhoto(avatar, name, photoUrl);
         avatar.title = user.email;
     }
 
-    renderTopbarMenu(user);
+    renderTopbarMenu(user, photoUrl);
     renderHeroMeta(user, panelType);
 
     if (!heroTitle) return;

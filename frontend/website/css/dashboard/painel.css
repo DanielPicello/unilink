@@ -1825,3 +1825,48 @@ main:focus {
 .panel-content>.api-alert {
     margin-bottom: 20px;
 }
+
+.panel-avatar.has-photo {
+    padding: 0;
+    overflow: hidden;
+}
+
+.panel-avatar.has-photo img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.panel-user-head-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.panel-user-head.has-photo {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-user-photo {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

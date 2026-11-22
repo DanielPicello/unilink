@@ -2,37 +2,47 @@ const filtros = document.querySelectorAll(".filtro");
 const cards = document.querySelectorAll(".card-professor");
 const pesquisa = document.querySelector("#pesquisa");
 
-pesquisa.addEventListener("input", () => {
-    const texto = pesquisa.value.toLowerCase();
-    cards.forEach(card => {
-        const nome = card.querySelector(".nome").textContent.toLowerCase();
-        const universidade = card.querySelector(".universidade").textContent.toLowerCase();
-        const formacao = card.querySelector(".formacao").textContent.toLowerCase();
+let categoriaAtual = "todos";
 
-        if (
+function aplicarFiltros() {
+    const texto = pesquisa.value.trim().toLowerCase();
+
+    cards.forEach((card) => {
+        const materia = card.dataset.materia;
+        const nome = card.querySelector(".nome")?.textContent.toLowerCase() ?? "";
+        const universidade = card.querySelector(".universidade")?.textContent.toLowerCase() ?? "";
+        const formacao = card.querySelector(".formacao")?.textContent.toLowerCase() ?? "";
+
+        const passaCategoria =
+            categoriaAtual === "todos" || materia === categoriaAtual;
+
+        const passaPesquisa =
+            !texto ||
             nome.includes(texto) ||
             universidade.includes(texto) ||
-            formacao.includes(texto)
-        ) {
-            card.style.display = "";
-        } else {
-            card.style.display = "none";
-        }
-    });
-});
+            formacao.includes(texto);
 
-filtros.forEach(filtro => {
+        card.style.display = passaCategoria && passaPesquisa ? "" : "none";
+    });
+}
+
+function marcarFiltroAtivo(filtroAtivo) {
+    filtros.forEach((filtro) => {
+        const ativo = filtro === filtroAtivo;
+        filtro.classList.toggle("ativo", ativo);
+        filtro.setAttribute("aria-pressed", String(ativo));
+    });
+}
+
+pesquisa.addEventListener("input", aplicarFiltros);
+
+filtros.forEach((filtro) => {
     filtro.addEventListener("click", () => {
-        const categoria = filtro.dataset.filtro;
-
-        cards.forEach(card => {
-
-            const materia = card.dataset.materia;
-            if (categoria === "todos" || materia === categoria) {
-                card.style.display = "block";
-            } else {
-                card.style.display = "none";
-            }
-        });
+        categoriaAtual = filtro.dataset.filtro;
+        marcarFiltroAtivo(filtro);
+        aplicarFiltros();
     });
 });
+
+marcarFiltroAtivo(document.querySelector('.filtro[data-filtro="todos"]'));
+aplicarFiltros();

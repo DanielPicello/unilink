@@ -14,10 +14,20 @@ const step3Subtitle = document.getElementById("step3Subtitle");
 
 const step2Feedback = document.getElementById("step2Feedback");
 const registerFeedback = document.getElementById("registerFeedback");
+const photoInput = document.getElementById("registerPhoto");
+const photoFeedback = document.getElementById("photoFeedback");
+const registerContinueLink = document.getElementById("registerContinueLink");
+
+const photoPickBtn = document.getElementById("photoPickBtn");
+const photoPickLabel = document.getElementById("photoPickLabel");
+const photoPreview = document.getElementById("photoPreview");
+const photoRemoveBtn = document.getElementById("photoRemoveBtn");
+const photoUploadHint = document.getElementById("photoUploadHint");
 
 let currentStep = 1;
 let selectedType = "student";
 let isSubmitting = false;
+let photoPreviewUrl = null;
 const PANEL_BY_TYPE = Object.freeze({
     student: "painel-aluno.html",
     teacher: "painel-professor.html",
@@ -54,6 +64,65 @@ function clearFeedback(element) {
     element.textContent = "";
 }
 
+function showPhotoNotice(message, redirectUrl, role) {
+    showFeedback(photoFeedback, message);
+    clearFeedback(registerFeedback);
+
+    submitButton.hidden = true;
+
+    const backButton = document.querySelector('[data-step-panel="3"] [data-back]');
+    if (backButton) backButton.hidden = true;
+
+    registerContinueLink.href = redirectUrl;
+    registerContinueLink.hidden = false;
+
+    if (typeof navPanelButton === "function") {
+        document.querySelectorAll(".nav-buttons, .mobile-nav-buttons").forEach((element) => {
+            element.innerHTML = navPanelButton({ role });
+        });
+    }
+
+    registerContinueLink.focus();
+}
+
+function revokePhotoPreview() {
+    if (photoPreviewUrl) {
+        URL.revokeObjectURL(photoPreviewUrl);
+        photoPreviewUrl = null;
+    }
+}
+
+function clearPhotoSelection() {
+    photoInput.value = "";
+    revokePhotoPreview();
+    photoPreview.removeAttribute("src");
+    photoPreview.hidden = true;
+    photoRemoveBtn.hidden = true;
+    photoPickLabel.textContent = "Escolher foto";
+    photoUploadHint.textContent = "JPEG ou PNG, até 5 MB. Você pode adicionar depois.";
+    clearFeedback(photoFeedback);
+}
+
+function showPhotoSelection(file) {
+    const invalid = validateProfilePhoto(file);
+
+    if (invalid) {
+        clearPhotoSelection();
+        showFeedback(photoFeedback, invalid);
+        return;
+    }
+
+    revokePhotoPreview();
+    photoPreviewUrl = URL.createObjectURL(file);
+
+    photoPreview.src = photoPreviewUrl;
+    photoPreview.hidden = false;
+    photoRemoveBtn.hidden = false;
+    photoPickLabel.textContent = "Trocar foto";
+    photoUploadHint.textContent = file.name;
+    clearFeedback(photoFeedback);
+}
+
 function markInvalid(element) {
     if (element) element.classList.add("invalid");
 }
@@ -67,6 +136,7 @@ function clearInvalid() {
 function clearAllFeedback() {
     clearFeedback(step2Feedback);
     clearFeedback(registerFeedback);
+    clearFeedback(photoFeedback);
     clearInvalid();
 }
 
@@ -392,6 +462,16 @@ async function handleSubmit(event) {
     if (isSubmitting) return;
     if (!validateStep3()) return;
 
+    const photoFile = photoInput?.files?.[0] ?? null;
+    if (photoFile) {
+        const invalid = validateProfilePhoto(photoFile);
+        if (invalid) {
+            showFeedback(registerFeedback, invalid);
+            photoPickBtn.focus();
+            return;
+        }
+    }
+
     const email = fields.email.value.trim();
     const password = fields.password.value;
     const originalHtml = submitButton.innerHTML;
@@ -422,7 +502,7 @@ async function handleSubmit(event) {
         return;
     }
     try {
-        await login(email, password);
+        const auth = await login(email, password);
     } catch (loginError) {
         console.error("Cadastro concluído, mas o login automático falhou:", loginError);
         writeLoginFlag(LOGIN_REGISTERED_KEY, "1");
@@ -430,8 +510,41 @@ async function handleSubmit(event) {
         return;
     }
 
-    window.location.replace(PANEL_BY_TYPE[selectedType] ?? "dashboard.html");
+    const redirectUrl = PANEL_BY_TYPE[selectedType] ?? "dashboard.html";
+
+    if (photoFile) {
+        submitButton.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Enviando foto...";
+
+        try {
+            await saveProfilePhoto(photoFile);
+        } catch (photoError) {
+            console.error("Falha ao enviar a foto no cadastro:", photoError);
+            showPhotoNotice(
+                "Sua conta foi criada, mas a foto não pôde ser enviada. Adicione-a depois em Meu perfil.",
+                redirectUrl,
+                auth.role
+            );
+            return;
+        }
+    }
+
+    window.location.replace(redirectUrl);
 }
+
+photoPickBtn.addEventListener("click", () => photoInput.click());
+
+photoInput.addEventListener("change", () => {
+    const file = photoInput.files?.[0];
+
+    if (!file) {
+        clearPhotoSelection();
+        return;
+    }
+
+    showPhotoSelection(file);
+});
+
+photoRemoveBtn.addEventListener("click", clearPhotoSelection);
 
 if (submitButton) {
     submitButton.addEventListener("click", handleSubmit);
