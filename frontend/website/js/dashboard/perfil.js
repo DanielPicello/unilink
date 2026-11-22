@@ -1,6 +1,9 @@
 const perfilState = { user: null, photoUrl: "" };
 
 const dirtyForms = new Set();
+const teacherSetupForm = document.getElementById("teacherSetup");
+const teacherModesList = document.getElementById("teacherModesList");
+const teacherModesFeedback = document.getElementById("teacherModesFeedback");
 
 function clearPerfilDirty() {
     dirtyForms.clear();
@@ -239,8 +242,102 @@ async function handleFormSubmit(event, config) {
     }
 }
 
+function renderTeacherModes(user) {
+    const subjects = user?.teacherProfile?.subjects ?? [];
+    teacherModesList.textContent = "";
+
+    subjects.forEach((subject) => {
+        const row = document.createElement("div");
+        row.className = "perfil-mode-row";
+        row.dataset.subjectId = subject.id;
+
+        const name = document.createElement("strong");
+        name.className = "perfil-mode-name";
+        name.textContent = subject.subject ?? "";
+        row.appendChild(name);
+
+        const options = document.createElement("div");
+        options.className = "perfil-mode-options";
+
+        [
+            ["ONLINE", "Online"],
+            ["IN_PERSON", "Presencial"],
+        ].forEach(([value, label]) => {
+            const option = document.createElement("label");
+            option.className = "perfil-mode-option";
+
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.value = value;
+            checkbox.checked = (subject.teachingModes ?? []).includes(value);
+
+            option.appendChild(checkbox);
+            option.appendChild(document.createTextNode(label));
+            options.appendChild(option);
+        });
+
+        row.appendChild(options);
+        teacherModesList.appendChild(row);
+    });
+}
+
+async function handleTeacherModesSubmit(event) {
+    event.preventDefault();
+
+    clearFeedback(teacherModesFeedback);
+
+    const rows = Array.from(teacherModesList.querySelectorAll(".perfil-mode-row"));
+
+    if (!rows.length) {
+        setFeedback(teacherModesFeedback, "Não há matérias para configurar.", "error");
+        return;
+    }
+
+    const subjects = [];
+
+    for (const row of rows) {
+        const teachingModes = Array.from(row.querySelectorAll("input:checked")).map(
+            (input) => input.value
+        );
+
+        if (!teachingModes.length) {
+            const name = row.querySelector(".perfil-mode-name").textContent;
+            setFeedback(
+                teacherModesFeedback,
+                `Escolha ao menos uma modalidade para "${name}".`,
+                "error"
+            );
+            return;
+        }
+
+        subjects.push({ id: row.dataset.subjectId, teachingModes });
+    }
+
+    const button = teacherSetupForm.querySelector('button[type="submit"]');
+    const originalHtml = button.innerHTML;
+
+    button.disabled = true;
+    button.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Salvando...";
+
+    try {
+        await saveTeacherSubjectModes(subjects);
+        setFeedback(teacherModesFeedback, "Modalidades salvas.", "success");
+        await refreshUser();
+
+        if (window.location.hash === "#teacherSetup") {
+            teacherSetupForm.scrollIntoView({ block: "start" });
+        }
+    } catch (error) {
+        if (showRequestError(null, teacherModesFeedback, error)) return;
+    } finally {
+        button.disabled = false;
+        button.innerHTML = originalHtml;
+    }
+}
+
 function bindForms() {
     Object.values(PERFIL_FORMS).forEach((config) => {
+        teacherSetupForm.addEventListener("submit", handleTeacherModesSubmit);
         config.form.addEventListener("submit", (event) => handleFormSubmit(event, config));
     });
 
@@ -494,7 +591,10 @@ function fillForms(user) {
         form.elements.course.value = teacher.course ?? "";
         form.elements.period.value = teacher.period ?? "";
         form.elements.hourlyRate.value = formatMoney(teacher.hourlyRate);
-        form.elements.subjects.value = (teacher.subjects ?? []).join(", ");
+        form.elements.subjects.value = (teacher.subjects ?? [])
+            .map((subject) => (typeof subject === "string" ? subject : subject?.subject))
+            .filter(Boolean)
+            .join(", ");
         form.elements.city.value = teacher.city ?? "";
     }
 
@@ -516,6 +616,8 @@ function applyVisibility(user) {
     PERFIL_FORMS.student.form.hidden = !user.studentProfile;
     PERFIL_FORMS.teacher.form.hidden = !user.teacherProfile;
     PERFIL_FORMS.company.form.hidden = !user.companyProfile;
+    teacherSetupForm.hidden =
+        !user.teacherProfile || (user.teacherProfile.subjects ?? []).length === 0;
 
     const hasAnyProfile = Boolean(
         user.personalProfile ||
@@ -543,6 +645,11 @@ async function refreshUser() {
     await renderHeader(perfilState.user);
     applyVisibility(perfilState.user);
     renderHybrid(perfilState.user);
+    renderTeacherModes(perfilState.user);
+
+    if (window.location.hash === "#teacherSetup") {
+        teacherSetupForm.scrollIntoView({ block: "start" });
+    }
 }
 
 async function initPerfil() {
@@ -562,6 +669,11 @@ async function initPerfil() {
     fillForms(user);
     applyVisibility(user);
     renderHybrid(user);
+    renderTeacherModes(user);
+
+    if (window.location.hash === "#teacherSetup") {
+        teacherSetupForm.scrollIntoView({ block: "start" });
+    }
 
     releasePanelGuard();
 }

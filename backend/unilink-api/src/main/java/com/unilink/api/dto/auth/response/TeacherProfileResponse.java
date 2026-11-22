@@ -9,6 +9,6 @@ public record TeacherProfileResponse(
         String period,
         BigDecimal hourlyRate,
         String city,
-        List<String> subjects
+        List<TeacherSubjectResponse> subjects
 ) {
 }

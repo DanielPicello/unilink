@@ -413,6 +413,8 @@ async function initPanelSession() {
     }
 
     renderTopbarMenu(user, photoUrl);
+    const setupAlert = document.getElementById("panelSetupAlert");
+    if (setupAlert) setupAlert.hidden = !teacherNeedsSetup(user);
     renderHeroMeta(user, panelType);
 
     if (!heroTitle) return;

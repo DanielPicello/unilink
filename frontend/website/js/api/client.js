@@ -77,6 +77,13 @@ function deleteProfilePhoto() {
     return apiRequest("/profile/photo", { method: "DELETE" });
 }
 
+function saveTeacherSubjectModes(subjects) {
+    return apiRequest("/profile/teacher/subject-modes", {
+        method: "PUT",
+        body: { subjects },
+    });
+}
+
 function logout() {
     return apiRequest("/auth/logout", { method: "POST" });
 }

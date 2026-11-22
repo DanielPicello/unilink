@@ -289,3 +289,8 @@ function validateProfilePhoto(file) {
     if (file.size > PHOTO_MAX_BYTES) return "A imagem deve ter no máximo 5 MB.";
     return "";
 }
+
+function teacherNeedsSetup(user) {
+    const subjects = user?.teacherProfile?.subjects ?? [];
+    return subjects.length > 0 && subjects.some((subject) => !subject.teachingModes?.length);
+}

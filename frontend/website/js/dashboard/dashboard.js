@@ -38,6 +38,8 @@ async function renderUser(user, visiblePanels) {
     const photoUrl = await loadProfilePhoto();
     applyAvatarPhoto(dashAvatar, name, photoUrl);
     dashAvatar.title = user.email;
+    const setupAlert = document.getElementById("dashSetupAlert");
+    if (setupAlert) setupAlert.hidden = !teacherNeedsSetup(user);
     dashUserName.textContent = name;
     dashUserEmail.textContent = user.email;
     dashUserRole.textContent = roleLabel(user.role);

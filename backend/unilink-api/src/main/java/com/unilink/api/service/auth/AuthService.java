@@ -33,6 +33,7 @@ import com.unilink.api.exception.custom.AccountSuspendedException;
 import com.unilink.api.exception.custom.ResourceNotFoundException;
 import com.unilink.api.dto.account.request.ChangePasswordRequest;
 import com.unilink.api.dto.account.request.DeleteAccountRequest;
+import com.unilink.api.dto.auth.response.TeacherSubjectResponse;
 
 import java.util.UUID;
 
@@ -331,7 +332,14 @@ public class AuthService {
                         teacherProfile.getCity(),
                         teacherProfile.getSubjects()
                                 .stream()
-                                .map(subject -> subject.getSubject())
+                                .map(subject -> new TeacherSubjectResponse(
+                                        subject.getId(),
+                                        subject.getSubject(),
+                                        subject.getTeachingModes()
+                                                .stream()
+                                                .sorted()
+                                                .toList()
+                                ))
                                 .toList()
                 );
             }

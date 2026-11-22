@@ -23,7 +23,16 @@ import com.unilink.api.entity.Role;
 import com.unilink.api.exception.custom.InvalidAccountRoleException;
 import com.unilink.api.repository.UserRepository;
 import com.unilink.api.dto.profile.request.AddStudentProfileRequest;
+import com.unilink.api.dto.profile.request.UpdateTeacherSubjectModesRequest;
+import com.unilink.api.entity.TeachingMode;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -78,6 +87,7 @@ public class ProfileService {
         studentProfileRepository.save(profile);
     }
 
+
     @Transactional
     public void updateTeacherProfile(
             UUID userId,
@@ -87,21 +97,131 @@ public class ProfileService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Perfil de professor não encontrado."
                 ));
+
         profile.changeUniversity(request.university());
         profile.changeCourse(request.course());
         profile.changePeriod(request.period());
         profile.changeHourlyRate(request.hourlyRate());
         profile.changeCity(request.city());
-        profile.getSubjects().clear();
-        teacherProfileRepository.flush();
-        for (String subject : request.subjects()) {
-            profile.getSubjects().add(
-                    new TeacherSubject(profile, subject)
+
+        Map<String, TeacherSubject> existingSubjects = new HashMap<>();
+
+        for (TeacherSubject subject : profile.getSubjects()) {
+            String key = subject.getSubject()
+                    .trim()
+                    .toLowerCase(Locale.ROOT);
+
+            existingSubjects.put(key, subject);
+        }
+
+        Set<String> requestedSubjects = new HashSet<>();
+
+        for (String subjectName : request.subjects()) {
+            requestedSubjects.add(
+                    subjectName.trim().toLowerCase(Locale.ROOT)
             );
+        }
+
+        profile.getSubjects().removeIf(subject -> {
+            String key = subject.getSubject()
+                    .trim()
+                    .toLowerCase(Locale.ROOT);
+
+            return !requestedSubjects.contains(key);
+        });
+
+        for (String subjectName : request.subjects()) {
+            String normalizedName = subjectName.trim();
+
+            String key = normalizedName.toLowerCase(Locale.ROOT);
+
+            TeacherSubject existingSubject = existingSubjects.get(key);
+
+            if (existingSubject != null) {
+                existingSubject.changeSubject(normalizedName);
+            } else {
+                TeacherSubject newSubject = new TeacherSubject(
+                        profile,
+                        normalizedName
+                );
+
+                profile.getSubjects().add(newSubject);
+                existingSubjects.put(key, newSubject);
+            }
         }
 
         teacherProfileRepository.save(profile);
     }
+
+
+    @Transactional
+    public void updateTeacherSubjectModes(
+            UUID userId,
+            UpdateTeacherSubjectModesRequest request
+    ) {
+        TeacherProfile profile = teacherProfileRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Perfil de professor não encontrado."
+                ));
+
+        Map<UUID, TeacherSubject> existingSubjects = new HashMap<>();
+
+        for (TeacherSubject subject : profile.getSubjects()) {
+            existingSubjects.put(subject.getId(), subject);
+        }
+
+        if (request.subjects() == null
+                || request.subjects().size() != existingSubjects.size()) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "É necessário configurar todas as matérias do professor."
+            );
+        }
+
+        Map<UUID, Set<TeachingMode>> requestedModes = new HashMap<>();
+
+        for (var item : request.subjects()) {
+
+            if (item == null || item.id() == null
+                    || !existingSubjects.containsKey(item.id())) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Uma das matérias informadas é inválida ou não pertence ao professor."
+                );
+            }
+
+            if (item.teachingModes() == null
+                    || item.teachingModes().isEmpty()) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Cada matéria deve possuir pelo menos uma modalidade."
+                );
+            }
+
+            Set<TeachingMode> modes = new HashSet<>(item.teachingModes());
+
+            if (modes.contains(null)
+                    || modes.size() != item.teachingModes().size()) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "As modalidades de uma matéria devem ser válidas e não podem estar duplicadas."
+                );
+            }
+
+            if (requestedModes.putIfAbsent(item.id(), modes) != null) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Uma matéria foi informada mais de uma vez."
+                );
+            }
+        }
+
+        for (Map.Entry<UUID, Set<TeachingMode>> entry : requestedModes.entrySet()) {
+            TeacherSubject subject = existingSubjects.get(entry.getKey());
+            subject.replaceTeachingModes(entry.getValue());
+        }
+    }
+
 
     @Transactional
     public void updateCompanyProfile(

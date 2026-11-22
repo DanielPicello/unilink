@@ -12,6 +12,7 @@ import com.unilink.api.dto.profile.request.UpdateTeacherProfileRequest;
 import com.unilink.api.dto.profile.request.UpdateCompanyProfileRequest;
 import com.unilink.api.dto.profile.request.AddTeacherProfileRequest;
 import com.unilink.api.dto.profile.request.AddStudentProfileRequest;
+import com.unilink.api.dto.profile.request.UpdateTeacherSubjectModesRequest;
 
 import java.util.UUID;
 
@@ -77,6 +78,34 @@ public class ProfileController {
 
         return ResponseEntity.noContent().build();
     }
+
+
+    @PutMapping("/teacher/subject-modes")
+    public ResponseEntity<Void> updateTeacherSubjectModes(
+            @Valid @RequestBody UpdateTeacherSubjectModesRequest request,
+            HttpServletRequest httpRequest
+    ) {
+        var session = httpRequest.getSession(false);
+
+        if (session == null) {
+            throw new UnauthenticatedException(
+                    "Usuário não autenticado."
+            );
+        }
+
+        Object userIdAttribute = session.getAttribute("userId");
+
+        if (!(userIdAttribute instanceof UUID userId)) {
+            throw new UnauthenticatedException(
+                    "Usuário não autenticado."
+            );
+        }
+
+        profileService.updateTeacherSubjectModes(userId, request);
+
+        return ResponseEntity.noContent().build();
+    }
+
 
     @PutMapping("/company")
     public ResponseEntity<Void> updateCompanyProfile(

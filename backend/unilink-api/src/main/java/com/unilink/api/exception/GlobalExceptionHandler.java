@@ -21,6 +21,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import com.unilink.api.exception.custom.UnauthenticatedException;
 import com.unilink.api.exception.custom.InvalidAccountRoleException;
 import com.unilink.api.exception.custom.InvalidProfilePhotoException;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -258,6 +259,29 @@ public class GlobalExceptionHandler {
                 Map.of()
         );
     }
+
+
+    @ExceptionHandler(ResponseStatusException.class)
+    public ResponseEntity<ApiErrorResponse> handleResponseStatusException(
+            ResponseStatusException ex,
+            HttpServletRequest request
+    ) {
+        HttpStatus status = HttpStatus.valueOf(
+                ex.getStatusCode().value()
+        );
+
+        String message = ex.getReason() != null
+                ? ex.getReason()
+                : status.getReasonPhrase();
+
+        return buildResponse(
+                status,
+                message,
+                request,
+                Map.of()
+        );
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleUnexpectedException(
