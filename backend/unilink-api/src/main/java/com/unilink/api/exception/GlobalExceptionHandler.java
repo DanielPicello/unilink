@@ -20,6 +20,8 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import com.unilink.api.exception.custom.UnauthenticatedException;
 import com.unilink.api.exception.custom.InvalidAccountRoleException;
+import com.unilink.api.exception.custom.InvalidProfilePhotoException;
+import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -111,6 +113,19 @@ public class GlobalExceptionHandler {
         );
     }
 
+    @ExceptionHandler(InvalidProfilePhotoException.class)
+    public ResponseEntity<ApiErrorResponse> handleInvalidProfilePhoto(
+            InvalidProfilePhotoException ex,
+            HttpServletRequest request
+    ) {
+        return buildResponse(
+                HttpStatus.BAD_REQUEST,
+                ex.getMessage(),
+                request,
+                Map.of()
+        );
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiErrorResponse> handleValidation(
             MethodArgumentNotValidException ex,
@@ -181,7 +196,7 @@ public class GlobalExceptionHandler {
     ) {
         return buildResponse(
                 HttpStatus.UNSUPPORTED_MEDIA_TYPE,
-                "Tipo de conteúdo não suportado. Utilize application/json.",
+                "Tipo de conteúdo não suportado para esta requisição.",
                 request,
                 Map.of()
         );
@@ -226,6 +241,19 @@ public class GlobalExceptionHandler {
         return buildResponse(
                 HttpStatus.CONFLICT,
                 exception.getMessage(),
+                request,
+                Map.of()
+        );
+    }
+
+    @ExceptionHandler(MaxUploadSizeExceededException.class)
+    public ResponseEntity<ApiErrorResponse> handleMaxUploadSizeExceeded(
+            MaxUploadSizeExceededException ex,
+            HttpServletRequest request
+    ) {
+        return buildResponse(
+                HttpStatus.PAYLOAD_TOO_LARGE,
+                "O arquivo enviado excede o limite máximo permitido.",
                 request,
                 Map.of()
         );
