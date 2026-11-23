@@ -64,208 +64,98 @@
                 </p>
                 <div class="search-box">
                     <i class='bx bx-search'></i>
-                    <input id="pesquisa" type="text" placeholder="Buscar por matéria, professor ou universidade...">
+                    <input id="pesquisa" type="text" placeholder="Buscar matéria, curso, faculdade ou cidade...">
                 </div>
             </div>
         </section>
-        <section class="categorias">
+        <details class="categorias filtros" id="filtrosDetalhes">
+            <summary class="filtros-header">
+                <span class="filtros-titulo">
+                    <i class='bx bx-filter-alt' aria-hidden="true"></i>
+                    Filtros <span class="filtros-count" id="filtrosCount" hidden></span>
+                </span>
+                <span class="filtros-acoes">
+                    <button type="button" class="filtros-limpar" id="limparFiltros">Limpar</button>
+                    <i class='bx bx-chevron-down filtros-chevron' aria-hidden="true"></i>
+                </span>
+            </summary>
+
             <div class="container">
-                <button class="filtro" data-filtro="todos">Todos</button>
-                <button class="filtro" data-filtro="matematica">Matemática</button>
-                <button class="filtro" data-filtro="programacao">Programação</button>
-                <button class="filtro" data-filtro="biologia">Biologia</button>
-                <button class="filtro" data-filtro="portugues">Português</button>
-                <button class="filtro" data-filtro="fisica">Física</button>
-                <button class="filtro" data-filtro="quimica">Química</button>
-                <button class="filtro" data-filtro="direito">Direito</button>
-                <button class="filtro" data-filtro="administracao">Administração</button>
+                <div class="filtros-grid">
+                    <label class="filtro-campo">
+                        <span>Matéria</span>
+                        <select id="filtroMateria">
+                            <option value="">Todas as matérias</option>
+                        </select>
+                    </label>
+
+                    <label class="filtro-campo">
+                        <span>Cidade</span>
+                        <select id="filtroCidade">
+                            <option value="">Todas as cidades</option>
+                        </select>
+                    </label>
+
+                    <label class="filtro-campo">
+                        <span>Universidade</span>
+                        <select id="filtroUniversidade">
+                            <option value="">Todas as universidades</option>
+                        </select>
+                    </label>
+
+                    <label class="filtro-campo">
+                        <span>Curso</span>
+                        <select id="filtroCurso">
+                            <option value="">Todos os cursos</option>
+                        </select>
+                    </label>
+
+                    <label class="filtro-campo">
+                        <span>Modalidade</span>
+                        <select id="filtroModalidade">
+                            <option value="">Todas</option>
+                            <option value="ONLINE">Online</option>
+                            <option value="IN_PERSON">Presencial</option>
+                        </select>
+                    </label>
+
+                    <label class="filtro-campo">
+                        <span>Ordenar por</span>
+                        <select id="filtroOrdem">
+                            <option value="id">Padrão</option>
+                            <option value="name">Nome (A-Z)</option>
+                            <option value="priceAsc">Menor preço</option>
+                            <option value="priceDesc">Maior preço</option>
+                        </select>
+                    </label>
+                </div>
             </div>
-        </section>
+        </details>
         <section class="professores">
             <div class="container">
-                <div class="card-professor" data-materia="matematica">
-                    <img src="img/professores/teacher-1.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">USP</span>
-                        <h3 class="nome">Mariana Oliveira</h3>
-                        <p class="formacao">Engenharia civil</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>São Paulo</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.9 (128)
-                            </span>
-                            <strong>R$ 70/h</strong>
-                        </div>
-                        <span class="online">
-                            Online
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
+                <div class="teachers-status" id="teachersLoading" role="status">
+                    <i class='bx bx-loader-alt bx-spin'></i>
+                    <span>Buscando professores...</span>
                 </div>
-                <div class="card-professor" data-materia="programacao">
-                    <img src="img/professores/teacher-2.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">UNICAMP</span>
-                        <h3 class="nome">João Pedro Lima</h3>
-                        <p class="formacao">Ciência da Computação</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>Campinas</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.8 (95)
-                            </span>
-                            <strong>R$ 65/h </strong>
-                        </div>
-                        <span class="online">
-                            Online
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
+
+                <div class="teachers-status" id="teachersEmpty" role="status" hidden>
+                    <i class='bx bx-search-alt-2'></i>
+                    <strong>Nenhum professor encontrado</strong>
+                    <span>Tente outra matéria ou remova os filtros.</span>
                 </div>
-                <div class="card-professor" data-materia="biologia">
-                    <img src="img/professores/teacher-3.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">UFRJ</span>
-                        <h3 class="nome">Beatriz Santos</h3>
-                        <p class="formacao">Biologia</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>Rio de Janeiro</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.9 (110)
-                            </span>
-                            <strong>R$ 60/h</strong>
-                        </div>
-                        <span class="presencial">
-                            Presencial
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
+
+                <div class="teachers-status" id="teachersError" role="alert" hidden>
+                    <i class='bx bx-wifi-off'></i>
+                    <strong>Não foi possível carregar os professores</strong>
+                    <span>Verifique se a API está rodando em localhost:8080 e tente novamente.</span>
                 </div>
-                <div class="card-professor" data-materia="administracao">
-                    <img src="img/professores/teacher-4.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">FGV</span>
-                        <h3 class="nome">Lucas Almeida</h3>
-                        <p class="formacao">Administração</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>São Paulo</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.7 (88)
-                            </span>
-                            <strong>R$ 55/h</strong>
-                        </div>
-                        <span class="online">
-                            Online
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
-                </div>
-                <div class="card-professor" data-materia="portugues">
-                    <img src="img/professores/teacher-1.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">UFMG</span>
-                        <h3 class="nome">Carla Mendes</h3>
-                        <p class="formacao">Letras</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>Belo Horizonte</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.9 (142)
-                            </span>
-                            <strong>R$ 50/h</strong>
-                        </div>
-                        <span class="online">
-                            Online
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
-                </div>
-                <div class="card-professor" data-materia="fisica">
-                    <img src="img/professores/teacher-2.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">USP</span>
-                        <h3 class="nome">Pedro Henrique</h3>
-                        <p class="formacao">Física</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>São Paulo</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.8 (76)
-                            </span>
-                            <strong>R$ 75/h</strong>
-                        </div>
-                        <span class="presencial">
-                            Presencial
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
-                </div>
-                <div class="card-professor" data-materia="quimica">
-                    <img src="img/professores/teacher-3.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">UFSC</span>
-                        <h3 class="nome">Larissa Costa</h3>
-                        <p class="formacao">Química</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>Florianópolis</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.9 (91)
-                            </span>
-                            <strong>R$ 65/h</strong>
-                        </div>
-                        <span class="online">
-                            Online
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
-                </div>
-                <div class="card-professor" data-materia="direito">
-                    <img src="img/professores/teacher-4.jpg" alt="Professor">
-                    <div class="card-info">
-                        <span class="universidade">PUC-RIO</span>
-                        <h3 class="nome">Bruno Rocha</h3>
-                        <p class="formacao">Direito</p>
-                        <div class="cidade">
-                            <i class='bx bx-map'></i>
-                            <span>Rio de Janeiro</span>
-                        </div>
-                        <div class="avaliacao">
-                            <span>
-                                <i class='bx bxs-star' style="color:#FFC107"></i>
-                                4.7 (64)
-                            </span>
-                            <strong>R$ 80/h</strong>
-                        </div>
-                        <span class="online">
-                            Online
-                        </span>
-                        <a href="#">Ver Perfil</a>
-                    </div>
+
+                <div class="teachers-grid" id="teachersGrid"></div>
+
+                <div class="teachers-more">
+                    <button type="button" class="btn-register" id="teachersMore" hidden>
+                        Carregar mais professores
+                    </button>
                 </div>
             </div>
         </section>

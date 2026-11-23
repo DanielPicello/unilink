@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.detalhe-professor,
+.detalhe-professor * {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.detalhe-professor .container {
+    display: block;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.detalhe-professor {
+    padding: 50px 0 90px;
+    background: #f5f9ff;
+    min-height: 70vh;
+}
+
+.detalhe-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 28px;
+    color: #2563EB;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.detalhe-voltar:hover {
+    text-decoration: underline;
+}
+
+.detalhe-card {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 32px;
+    padding: 32px;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .07);
+}
+
+.detalhe-card[hidden] {
+    display: none !important;
+}
+
+.detalhe-lateral {
+    align-self: start;
+    padding-right: 28px;
+    border-right: 1px solid #E5E7EB;
+}
+
+.detalhe-foto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #DBEAFE, #EFF6FF);
+    color: #2563EB;
+    font-size: 64px;
+    font-weight: 800;
+}
+
+.detalhe-foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detalhe-lateral .universidade {
+    color: #2563EB;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.detalhe-lateral h1 {
+    margin: 6px 0 4px;
+    color: #111827;
+    font-size: 28px;
+    line-height: 1.2;
+}
+
+.detalhe-lateral .formacao {
+    display: block;
+    color: #6B7280;
+    font-size: 16px;
+}
+
+.detalhe-lateral .cidade {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    color: #6B7280;
+    font-size: 15px;
+}
+
+.detalhe-modes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.online,
+.presencial {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.online {
+    background: #DCFCE7;
+    color: #16A34A;
+}
+
+.presencial {
+    background: #DBEAFE;
+    color: #2563EB;
+}
+
+.detalhe-principal {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    min-width: 0;
+}
+
+.detalhe-bloco h2 {
+    margin-bottom: 10px;
+    color: #111827;
+    font-size: 18px;
+}
+
+.detalhe-bloco p {
+    color: #4B5563;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.detalhe-fatos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.detalhe-fatos div {
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #F9FAFB;
+}
+
+.detalhe-fatos dt {
+    color: #6B7280;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.detalhe-fatos dd {
+    margin: 4px 0 0;
+    color: #111827;
+    font-size: 15px;
+}
+
+.detalhe-label {
+    display: block;
+    margin: 16px 0 6px;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.detalhe-select,
+.detalhe-hours {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #D1D5DB;
+    border-radius: 10px;
+    background: #fff;
+    color: #111827;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+.detalhe-select:focus-visible,
+.detalhe-hours:focus-visible {
+    outline: 3px solid rgba(37, 99, 235, .25);
+    outline-offset: 1px;
+    border-color: #2563EB;
+}
+
+.detalhe-hours {
+    max-width: 140px;
+}
+
+.detalhe-subject-detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding: 14px 16px;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    background: #F9FAFB;
+}
+
+.detalhe-subject-name {
+    color: #111827;
+    font-size: 15px;
+}
+
+.detalhe-subject-modes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.detalhe-calculo {
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #EFF6FF;
+}
+
+.detalhe-calculo-linha {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0;
+    color: #6B7280;
+    font-size: 14px;
+}
+
+.detalhe-calculo-linha strong {
+    color: #111827;
+    font-size: 15px;
+}
+
+.detalhe-total {
+    margin-top: 8px;
+    padding-top: 14px;
+    border-top: 1px solid #BFDBFE;
+    color: #1E3A8A;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.detalhe-total strong {
+    color: #2563EB;
+    font-size: 24px;
+}
+
+.detalhe-observacao {
+    margin-top: 12px;
+    color: #9CA3AF;
+    font-size: 12px;
+}
+
+.teachers-status {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 70px 20px;
+    color: #6B7280;
+    text-align: center;
+}
+
+.teachers-status[hidden] {
+    display: none !important;
+}
+
+.teachers-status i {
+    color: #2563EB;
+    font-size: 34px;
+}
+
+.teachers-status strong {
+    color: #111827;
+    font-size: 19px;
+}
+
+.teachers-status span {
+    font-size: 15px;
+}
+
+#detailMissing i {
+    color: #DC2626;
+}
+
+.detalhe-voltar-btn {
+    margin-top: 10px;
+    padding: 10px 18px;
+    border-radius: 8px;
+    background: #2563EB;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+@media (max-width: 900px) {
+    .detalhe-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .detalhe-lateral {
+        padding-right: 0;
+        padding-bottom: 24px;
+        border-right: none;
+        border-bottom: 1px solid #E5E7EB;
+    }
+
+    .detalhe-foto {
+        height: 180px;
+    }
+}
+
+@media (max-width: 700px) {
+    .detalhe-professor {
+        padding: 30px 0 60px;
+    }
+
+    .detalhe-card {
+        padding: 20px;
+    }
+
+    .detalhe-lateral h1 {
+        font-size: 26px;
+    }
+
+    .detalhe-fatos {
+        grid-template-columns: 1fr;
+    }
+}
+
+.detalhe-voltar-btn--final {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 18px;
+}

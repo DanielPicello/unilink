@@ -9,6 +9,7 @@ import com.unilink.api.exception.custom.InvalidProfilePhotoException;
 import com.unilink.api.exception.custom.ResourceNotFoundException;
 import com.unilink.api.repository.ProfilePhotoRepository;
 import com.unilink.api.repository.UserRepository;
+import com.unilink.api.entity.TeacherProfile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -107,6 +108,7 @@ public class ProfilePhotoService {
                 .map(ProfilePhoto::getPhoto);
     }
 
+
     @Transactional(readOnly = true)
     public String getPublicTeacherPhoto(UUID teacherId) {
 
@@ -115,14 +117,31 @@ public class ProfilePhotoService {
                         "Professor não encontrado."
                 ));
 
-        boolean hasTeacherProfile =
+        boolean validRole =
                 teacher.getRole() == Role.TEACHER
                         || teacher.getRole() == Role.STUDENT_TEACHER;
 
-        if (teacher.getStatus() != UserStatus.ACTIVE
-                || !hasTeacherProfile
-                || !teacherProfileRepository.existsById(teacherId)) {
+        if (!validRole || teacher.getStatus() != UserStatus.ACTIVE) {
+            throw new ResourceNotFoundException(
+                    "Professor não encontrado."
+            );
+        }
 
+        TeacherProfile profile = teacherProfileRepository
+                .findById(teacherId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Professor não encontrado."
+                ));
+
+        boolean incompleteSubjects =
+                profile.getSubjects().isEmpty()
+                        || profile.getSubjects()
+                        .stream()
+                        .anyMatch(subject ->
+                                subject.getTeachingModes().isEmpty()
+                        );
+
+        if (!profile.isPublic() || incompleteSubjects) {
             throw new ResourceNotFoundException(
                     "Professor não encontrado."
             );
@@ -134,6 +153,7 @@ public class ProfilePhotoService {
                         "Foto de perfil não encontrada."
                 ));
     }
+
 
     @Transactional
     public void deletePhoto(UUID userId) {

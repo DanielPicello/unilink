@@ -13,6 +13,7 @@ import com.unilink.api.dto.profile.request.UpdateCompanyProfileRequest;
 import com.unilink.api.dto.profile.request.AddTeacherProfileRequest;
 import com.unilink.api.dto.profile.request.AddStudentProfileRequest;
 import com.unilink.api.dto.profile.request.UpdateTeacherSubjectModesRequest;
+import com.unilink.api.dto.profile.request.UpdateTeacherVisibilityRequest;
 
 import java.util.UUID;
 
@@ -102,6 +103,33 @@ public class ProfileController {
         }
 
         profileService.updateTeacherSubjectModes(userId, request);
+
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/teacher/visibility")
+    public ResponseEntity<Void> updateTeacherVisibility(
+            @Valid @RequestBody UpdateTeacherVisibilityRequest request,
+            HttpServletRequest httpRequest
+    ) {
+        var session = httpRequest.getSession(false);
+
+        if (session == null) {
+            throw new UnauthenticatedException(
+                    "Usuário não autenticado."
+            );
+        }
+
+        Object userIdAttribute = session.getAttribute("userId");
+
+        if (!(userIdAttribute instanceof UUID userId)) {
+            throw new UnauthenticatedException(
+                    "Usuário não autenticado."
+            );
+        }
+
+        profileService.updateTeacherVisibility(userId, request);
 
         return ResponseEntity.noContent().build();
     }

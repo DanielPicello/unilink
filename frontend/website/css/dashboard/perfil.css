@@ -674,3 +674,79 @@ body.confirm-open {
     color: var(--panel-primary);
     font-weight: 600;
 }
+
+.perfil-visibility-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 4px;
+}
+
+.perfil-switch {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.perfil-switch input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.perfil-switch-track {
+    position: relative;
+    display: block;
+    width: 46px;
+    height: 26px;
+    border-radius: 999px;
+    background: #CBD5E1;
+    transition: background .18s;
+}
+
+.perfil-switch-track::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
+    transition: transform .18s;
+}
+
+.perfil-switch input:checked+.perfil-switch-track {
+    background: var(--panel-primary);
+}
+
+.perfil-switch input:checked+.perfil-switch-track::after {
+    transform: translateX(20px);
+}
+
+.perfil-switch input:focus-visible+.perfil-switch-track {
+    outline: 3px solid rgba(37, 99, 235, .25);
+    outline-offset: 2px;
+}
+
+.perfil-visibility-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.perfil-visibility-copy strong {
+    color: var(--panel-title);
+    font-size: 14px;
+}
+
+.perfil-visibility-copy span {
+    color: var(--panel-text);
+    font-size: 13px;
+}

@@ -84,6 +84,13 @@ function saveTeacherSubjectModes(subjects) {
     });
 }
 
+function saveTeacherVisibility(isPublic) {
+    return apiRequest("/profile/teacher/visibility", {
+        method: "PUT",
+        body: { isPublic },
+    });
+}
+
 function logout() {
     return apiRequest("/auth/logout", { method: "POST" });
 }
@@ -135,4 +142,20 @@ async function getOptionalUser() {
         if (error instanceof ApiError && error.status === 401) return null;
         throw error;
     }
+}
+
+function searchTeachers(params = {}) {
+    const query = new URLSearchParams();
+
+    Object.entries(params).forEach(([key, value]) => {
+        if (value !== null && value !== undefined && value !== "") {
+            query.set(key, value);
+        }
+    });
+
+    return apiRequest(`/teachers?${query.toString()}`);
+}
+
+function getTeacher(teacherId) {
+    return apiRequest(`/teachers/${encodeURIComponent(teacherId)}`);
 }

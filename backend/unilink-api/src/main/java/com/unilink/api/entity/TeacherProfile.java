@@ -36,6 +36,9 @@ public class TeacherProfile {
     @Column(name = "city", length = 120)
     private String city;
 
+    @Column(name = "is_public", nullable = false)
+    private boolean isPublic = false;
+
     @OneToMany(
             mappedBy = "teacherProfile",
             cascade = CascadeType.ALL,
@@ -90,6 +93,10 @@ public class TeacherProfile {
         return city;
     }
 
+    public boolean isPublic() {
+        return isPublic;
+    }
+
     public List<TeacherSubject> getSubjects() {
         return subjects;
     }
@@ -112,5 +119,9 @@ public class TeacherProfile {
 
     public void changeCity(String city) {
         this.city = city;
+    }
+
+    public void changeVisibility(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 }

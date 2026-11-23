@@ -216,6 +216,37 @@
                         <button type="submit" class="panel-hero-btn perfil-save">Salvar modalidades</button>
                     </div>
                 </form>
+                <section class="panel-card perfil-form" id="teacherVisibility" hidden>
+                    <div class="perfil-section-head">
+                        <div>
+                            <h2>Aparecer na busca de professores</h2>
+                            <p>
+                                Publique seu perfil para aparecer na busca. É preciso ter ao menos
+                                uma matéria com modalidade definida.
+                            </p>
+                        </div>
+                        <span class="perfil-section-icon">
+                            <i class='bx bx-show'></i>
+                        </span>
+                    </div>
+                    <div class="perfil-visibility-row">
+                        <label class="perfil-switch">
+                            <input type="checkbox" id="teacherPublicToggle" role="switch"
+                                aria-label="Tornar perfil público na busca">
+                            <span class="perfil-switch-track" aria-hidden="true"></span>
+                        </label>
+                        <div class="perfil-visibility-copy">
+                            <strong id="visibilityState" aria-live="polite">Perfil privado</strong>
+                            <span>Mostrar meu perfil para alunos na página de professores.</span>
+                        </div>
+                    </div>
+                    <div class="perfil-actions">
+                        <p class="perfil-feedback" id="visibilityFeedback" hidden role="status"></p>
+                        <button type="button" class="panel-hero-btn perfil-save" id="visibilitySave">
+                            Salvar visibilidade
+                        </button>
+                    </div>
+                </section>  
                 <form class="panel-card perfil-form" id="formCompany" novalidate hidden>
                     <div class="perfil-section-head">
                         <div>

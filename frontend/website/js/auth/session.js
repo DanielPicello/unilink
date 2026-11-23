@@ -294,3 +294,27 @@ function teacherNeedsSetup(user) {
     const subjects = user?.teacherProfile?.subjects ?? [];
     return subjects.length > 0 && subjects.some((subject) => !subject.teachingModes?.length);
 }
+
+function teacherNeedsPublish(user) {
+    const profile = user?.teacherProfile;
+    if (!profile || profile.isPublic) return false;
+
+    const subjects = profile.subjects ?? [];
+    return subjects.length > 0
+        && subjects.every((subject) => (subject.teachingModes ?? []).length > 0);
+}
+
+function slugifyText(value) {
+    return String(value ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "") || "professor";
+}
+
+function teacherSlug(fullName, teacherId) {
+    const id = String(teacherId ?? "").replace(/-/g, "");
+    const suffix = id.slice(0, 4) || "0000";
+    return `${slugifyText(fullName)}-${suffix}`;
+}

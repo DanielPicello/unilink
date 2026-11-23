@@ -1938,3 +1938,25 @@ main:focus {
         flex-wrap: wrap;
     }
 }
+
+.setup-alert--soft {
+    border-color: #BBF7D0;
+    background: #F0FDF4;
+}
+
+.setup-alert--soft .setup-alert-icon {
+    background: #DCFCE7;
+    color: #15803D;
+}
+
+.setup-alert--soft .setup-alert-copy strong {
+    color: #166534;
+}
+
+.setup-alert--soft .setup-alert-copy p {
+    color: #14532D;
+}
+
+.setup-alert--soft .setup-alert-link {
+    color: #15803D;
+}

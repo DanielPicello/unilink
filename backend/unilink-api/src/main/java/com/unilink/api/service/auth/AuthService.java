@@ -324,6 +324,7 @@ public class AuthService {
                                         new ResourceNotFoundException("Perfil de professor não encontrado.")
                                 );
 
+
                 teacherProfileResponse = new TeacherProfileResponse(
                         teacherProfile.getUniversity(),
                         teacherProfile.getCourse(),
@@ -340,7 +341,8 @@ public class AuthService {
                                                 .sorted()
                                                 .toList()
                                 ))
-                                .toList()
+                                .toList(),
+                        teacherProfile.isPublic()
                 );
             }
         }

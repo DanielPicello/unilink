@@ -9,6 +9,7 @@ public record TeacherProfileResponse(
         String period,
         BigDecimal hourlyRate,
         String city,
-        List<TeacherSubjectResponse> subjects
+        List<TeacherSubjectResponse> subjects,
+        boolean isPublic
 ) {
 }

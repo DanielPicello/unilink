@@ -25,6 +25,9 @@ import com.unilink.api.repository.UserRepository;
 import com.unilink.api.dto.profile.request.AddStudentProfileRequest;
 import com.unilink.api.dto.profile.request.UpdateTeacherSubjectModesRequest;
 import com.unilink.api.entity.TeachingMode;
+import com.unilink.api.dto.profile.request.UpdateTeacherVisibilityRequest;
+import com.unilink.api.entity.UserStatus;
+import com.unilink.api.exception.custom.AccountSuspendedException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -220,6 +223,54 @@ public class ProfileService {
             TeacherSubject subject = existingSubjects.get(entry.getKey());
             subject.replaceTeachingModes(entry.getValue());
         }
+    }
+
+
+    @Transactional
+    public void updateTeacherVisibility(
+            UUID userId,
+            UpdateTeacherVisibilityRequest request
+    ) {
+        TeacherProfile profile = teacherProfileRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Perfil de professor não encontrado."
+                ));
+
+        if (request.isPublic()) {
+
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new ResourceNotFoundException(
+                            "Usuário não encontrado."
+                    ));
+
+            if (user.getStatus() != UserStatus.ACTIVE) {
+                throw new AccountSuspendedException(
+                        "Contas suspensas não podem publicar o perfil."
+                );
+            }
+
+            if (profile.getSubjects().isEmpty()) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Cadastre pelo menos uma matéria antes de publicar o perfil."
+                );
+            }
+
+            boolean hasUnconfiguredSubjects = profile.getSubjects()
+                    .stream()
+                    .anyMatch(subject ->
+                            subject.getTeachingModes().isEmpty()
+                    );
+
+            if (hasUnconfiguredSubjects) {
+                throw new ResponseStatusException(
+                        HttpStatus.BAD_REQUEST,
+                        "Configure as modalidades de todas as matérias antes de publicar o perfil."
+                );
+            }
+        }
+
+        profile.changeVisibility(request.isPublic());
     }
 
 

@@ -4,6 +4,11 @@ const dirtyForms = new Set();
 const teacherSetupForm = document.getElementById("teacherSetup");
 const teacherModesList = document.getElementById("teacherModesList");
 const teacherModesFeedback = document.getElementById("teacherModesFeedback");
+const teacherVisibilityCard = document.getElementById("teacherVisibility");
+const teacherPublicToggle = document.getElementById("teacherPublicToggle");
+const teacherVisibilityState = document.getElementById("visibilityState");
+const teacherVisibilityFeedback = document.getElementById("visibilityFeedback");
+const teacherVisibilitySave = document.getElementById("visibilitySave");
 
 function clearPerfilDirty() {
     dirtyForms.clear();
@@ -73,7 +78,7 @@ const PERFIL_FORMS = {
             if (!fullName) return { field: "fullName", message: "Informe seu nome completo." };
 
             const bio = form.elements.bio.value.trim();
-            if (!bio) return { field: "bio", message: "Preencha a bio — ela aparece no seu perfil." };
+            if (!bio) return { field: "bio", message: "Preencha a bio, ela aparece no seu perfil." };
 
             return null;
         },
@@ -335,9 +340,48 @@ async function handleTeacherModesSubmit(event) {
     }
 }
 
+function renderVisibilityState() {
+    teacherVisibilityState.textContent = teacherPublicToggle.checked
+        ? "Perfil público, aparece na busca"
+        : "Perfil privado, não aparece na busca";
+}
+
+function renderVisibility(user) {
+    const profile = user?.teacherProfile;
+    teacherVisibilityCard.hidden = !profile;
+    if (!profile) return;
+
+    teacherPublicToggle.checked = Boolean(profile.isPublic);
+    renderVisibilityState();
+}
+
+async function handleVisibilitySave() {
+    clearFeedback(teacherVisibilityFeedback);
+
+    const isPublic = teacherPublicToggle.checked;
+    const originalHtml = teacherVisibilitySave.innerHTML;
+
+    teacherVisibilitySave.disabled = true;
+    teacherVisibilitySave.innerHTML = "<i class='bx bx-loader-alt bx-spin'></i> Salvando...";
+
+    try {
+        await saveTeacherVisibility(isPublic);
+        setFeedback(teacherVisibilityFeedback, "Visibilidade salva.", "success");
+        await refreshUser();
+    } catch (error) {
+        if (showRequestError(null, teacherVisibilityFeedback, error)) return;
+        teacherPublicToggle.checked = Boolean(perfilState.user?.teacherProfile?.isPublic);
+    } finally {
+        teacherVisibilitySave.disabled = false;
+        teacherVisibilitySave.innerHTML = originalHtml;
+    }
+}
+
 function bindForms() {
     Object.values(PERFIL_FORMS).forEach((config) => {
         teacherSetupForm.addEventListener("submit", handleTeacherModesSubmit);
+        teacherVisibilitySave.addEventListener("click", handleVisibilitySave);
+        teacherPublicToggle.addEventListener("change", renderVisibilityState);
         config.form.addEventListener("submit", (event) => handleFormSubmit(event, config));
     });
 
@@ -646,6 +690,7 @@ async function refreshUser() {
     applyVisibility(perfilState.user);
     renderHybrid(perfilState.user);
     renderTeacherModes(perfilState.user);
+    renderVisibility(perfilState.user);
 
     if (window.location.hash === "#teacherSetup") {
         teacherSetupForm.scrollIntoView({ block: "start" });
@@ -670,9 +715,11 @@ async function initPerfil() {
     applyVisibility(user);
     renderHybrid(user);
     renderTeacherModes(user);
+    renderVisibility(user);
 
-    if (window.location.hash === "#teacherSetup") {
-        teacherSetupForm.scrollIntoView({ block: "start" });
+    const hashTarget = window.location.hash.slice(1);
+    if (hashTarget === "teacherSetup" || hashTarget === "teacherVisibility") {
+        document.getElementById(hashTarget)?.scrollIntoView({ block: "start" });
     }
 
     releasePanelGuard();

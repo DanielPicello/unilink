@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do professor | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/marketing/perfil-professor.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+<body>
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <header id="header">
+        <nav class="navbar">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <img src="img/marca/logo.png" alt="Logo">
+                </div>
+                <span>Uni<span style="color:#2563EB">Link</span></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="professores.html">Encontrar Professores</a></li>
+                <li><a href="empresas.html">Empresas</a></li>
+                <li><a href="como-funciona.html">Como Funciona</a></li>
+                <li><a href="sobre.html">Sobre</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn-login" onclick="window.location.href='login.html'">
+                    <i class='bx bx-log-in' style='color:#0e0e0e'></i>
+                    Login
+                </button>
+                <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                <i class='bx bx-menu'></i>
+            </button>
+            <div class="mobile-menu" id="mobileMenu">
+                <ul class="mobile-nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="professores.html">Encontrar Professores</a></li>
+                    <li><a href="empresas.html">Empresas</a></li>
+                    <li><a href="como-funciona.html">Como Funciona</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
+                </ul>
+                <div class="mobile-nav-buttons">
+                    <button class="btn-login" onclick="window.location.href='login.html'">
+                        <i class='bx bx-log-in'></i>
+                        Login
+                    </button>
+                    <button class="btn-register" onclick="window.location.href='register.html'">Cadastre-se</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main id="conteudo" tabindex="-1">
+        <section class="detalhe-professor">
+            <div class="container">
+                <a class="detalhe-voltar" href="professores.html">
+                    <i class='bx bx-left-arrow-alt' aria-hidden="true"></i>
+                    Voltar para a busca
+                </a>
+
+                <div class="teachers-status" id="detailLoading" role="status">
+                    <i class='bx bx-loader-alt bx-spin' aria-hidden="true"></i>
+                    <span>Carregando perfil...</span>
+                </div>
+
+                <div class="teachers-status" id="detailMissing" role="alert" hidden>
+                    <i class='bx bx-user-x' aria-hidden="true"></i>
+                    <strong id="detailMissingTitle">Professor não encontrado</strong>
+                    <span id="detailMissingText">
+                        Este perfil pode ter sido desativado ou não estar mais disponível na busca.
+                    </span>
+                    <a class="detalhe-voltar-btn" href="professores.html">Ver outros professores</a>
+                </div>
+
+                <article class="detalhe-card" id="detailCard" hidden>
+                    <aside class="detalhe-lateral">
+                        <div class="detalhe-foto" id="detailPhoto"></div>
+                        <span class="universidade" id="detailUniversity"></span>
+                        <h1 id="detailName"></h1>
+                        <span class="formacao" id="detailCourse"></span>
+                        <div class="cidade">
+                            <i class='bx bx-map' aria-hidden="true"></i>
+                            <span id="detailCity"></span>
+                        </div>
+                        <div class="detalhe-modes" id="detailModes"></div>
+                    </aside>
+
+                    <div class="detalhe-principal">
+                        <section class="detalhe-bloco">
+                            <h2>Sobre mim</h2>
+                            <p id="detailBio"></p>
+                        </section>
+
+                        <section class="detalhe-bloco">
+                            <h2>Formação</h2>
+                            <dl class="detalhe-fatos">
+                                <div>
+                                    <dt>Universidade</dt>
+                                    <dd id="detailUniversityFact"></dd>
+                                </div>
+                                <div>
+                                    <dt>Curso</dt>
+                                    <dd id="detailCourseFact"></dd>
+                                </div>
+                                <div>
+                                    <dt>Período</dt>
+                                    <dd id="detailPeriod"></dd>
+                                </div>
+                                <div>
+                                    <dt>Cidade</dt>
+                                    <dd id="detailCityFact"></dd>
+                                </div>
+                            </dl>
+                        </section>
+
+                        <section class="detalhe-bloco detalhe-aula">
+                            <h2>Matérias e modalidades</h2>
+
+                            <label class="detalhe-label" for="detailSubjectSelect">Escolha uma matéria</label>
+                            <select class="detalhe-select" id="detailSubjectSelect"></select>
+
+                            <div class="detalhe-subject-detail" id="detailSubjectDetail" aria-live="polite"></div>
+
+                            <label class="detalhe-label" for="detailHours">Quantidade de horas</label>
+                            <input class="detalhe-hours" type="number" id="detailHours" min="1" max="20" step="1"
+                                value="1" inputmode="numeric">
+
+                            <div class="detalhe-calculo">
+                                <div class="detalhe-calculo-linha">
+                                    <span>Valor por hora</span>
+                                    <strong id="detailHourRate"></strong>
+                                </div>
+                                <div class="detalhe-calculo-linha">
+                                    <span>Horas</span>
+                                    <strong id="detailHoursLabel"></strong>
+                                </div>
+                                <div class="detalhe-calculo-linha detalhe-total">
+                                    <span>Total estimado</span>
+                                    <strong id="detailTotal"></strong>
+                                </div>
+                            </div>
+
+                            <p class="detalhe-observacao">
+                                Valor estimado. O agendamento ainda não está disponível.
+                            </p>
+                            <a class="detalhe-voltar-btn detalhe-voltar-btn--final" href="professores.html">
+                                <i class='bx bx-left-arrow-alt' aria-hidden="true"></i>
+                                Voltar para a busca
+                            </a>
+                        </section>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <img src="img/marca/logo.png" alt="Logo">
+                        </div>
+                        <span>UniLink</span>
+                    </a>
+                    <p>
+                        Conectando universitários, alunos e empresas para um futuro com mais conhecimento e
+                        oportunidades.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-instagram'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#"><i class='bx bxl-youtube'></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <a href="index.html">Home</a>
+                    <a href="professores.html">Encontrar Professores</a>
+                    <a href="empresas.html">Empresas</a>
+                    <a href="como-funciona.html">Como Funciona</a>
+                    <a href="sobre.html">Sobre</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Para usuários</h4>
+                    <a href="register.html">Cadastrar-se</a>
+                    <a href="login.html">Login</a>
+                    <a href="faq.html">Perguntas Frequentes</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Para empresas</h4>
+                    <a href="#">Publicar oportunidade</a>
+                    <a href="#">Planos e preços</a>
+                    <a href="#">Como contratar</a>
+                    <a href="#">Fale com vendas</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>
+                    © 2026 UniLink. Todos os direitos reservados.
+                </p>
+                <p>
+                    Feito com
+                    <i class='bx bx-heart'></i>
+                    para transformar vidas através da educação.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/auth/nav.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/marketing/perfil-professor.js"></script>
+</body>
+
+</html>

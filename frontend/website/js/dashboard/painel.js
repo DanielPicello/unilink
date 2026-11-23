@@ -415,6 +415,8 @@ async function initPanelSession() {
     renderTopbarMenu(user, photoUrl);
     const setupAlert = document.getElementById("panelSetupAlert");
     if (setupAlert) setupAlert.hidden = !teacherNeedsSetup(user);
+    const publishAlert = document.getElementById("panelPublishAlert");
+    if (publishAlert) publishAlert.hidden = !teacherNeedsPublish(user);
     renderHeroMeta(user, panelType);
 
     if (!heroTitle) return;
