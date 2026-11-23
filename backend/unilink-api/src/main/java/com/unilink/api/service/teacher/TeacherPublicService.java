@@ -98,7 +98,10 @@ public class TeacherPublicService {
     }
 
 
-    @Transactional(readOnly = true)
+    @Transactional(
+            readOnly = true,
+            noRollbackFor = ResourceNotFoundException.class
+    )
     public TeacherPublicDetailResponse getPublicTeacher(
             UUID teacherId
     ) {
@@ -163,6 +166,14 @@ public class TeacherPublicService {
                 subjects,
                 getPhotoUrl(teacherId)
         );
+    }
+
+
+    @Transactional(readOnly = true)
+    public Page<TeacherPublicResponse> mapPublicTeacherPage(
+            Page<TeacherProfile> teachers
+    ) {
+        return toPublicPage(teachers);
     }
 
 

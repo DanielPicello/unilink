@@ -11,9 +11,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 import java.math.BigDecimal;
-import java.util.List;
 
 public interface TeacherProfileRepository
         extends JpaRepository<TeacherProfile, UUID> {
@@ -122,5 +123,36 @@ public interface TeacherProfileRepository
     List<TeacherProfile> findWithSubjectsAndModes(
             @Param("ids") List<UUID> ids
     );
+
+
+    @Query("""
+            SELECT teacher.id
+            FROM TeacherProfile teacher
+            JOIN teacher.user user
+            WHERE teacher.id IN :teacherIds
+              AND teacher.isPublic = true
+              AND user.status = :status
+              AND user.role IN :roles
+              AND teacher.subjects IS NOT EMPTY
+            
+              AND NOT EXISTS (
+                  SELECT subject.id
+                  FROM TeacherSubject subject
+                  WHERE subject.teacherProfile = teacher
+                    AND subject.teachingModes IS EMPTY
+              )
+            
+              AND EXISTS (
+                  SELECT personal.id
+                  FROM PersonalProfile personal
+                  WHERE personal.id = teacher.id
+              )
+            """)
+    List<UUID> findAvailableTeacherIds(
+            @Param("teacherIds") Collection<UUID> teacherIds,
+            @Param("status") UserStatus status,
+            @Param("roles") Collection<Role> roles
+    );
+
 
 }
