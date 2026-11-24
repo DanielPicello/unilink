@@ -52,7 +52,7 @@ public class StudentFavoriteTeacherService {
     @Transactional
     public void addFavorite(UUID studentId, UUID teacherId) {
 
-        
+
         requireStudent(studentId);
 
         if (studentId.equals(teacherId)) {

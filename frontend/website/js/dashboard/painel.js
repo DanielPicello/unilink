@@ -15,7 +15,7 @@ const panelConfig = {
             {
                 label: "Conexões",
                 items: [
-                    { icon: "bx-heart", text: "Favoritos", href: "#" },
+                    { icon: "bx-heart", text: "Favoritos", href: "painel-favoritos.html" },
                     { icon: "bx-message-rounded-dots", text: "Mensagens", href: "#" }
                 ]
             },

@@ -357,3 +357,44 @@
     gap: 6px;
     margin-top: 18px;
 }
+
+.detalhe-fav-host {
+    margin-top: 18px;
+}
+
+.detalhe-fav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid #2563EB;
+    border-radius: 10px;
+    background: #fff;
+    color: #2563EB;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.detalhe-fav-btn:hover {
+    background: #EFF6FF;
+}
+
+.detalhe-fav-btn[aria-pressed="true"] {
+    background: #2563EB;
+    color: #fff;
+}
+
+.detalhe-fav-btn[aria-pressed="true"]:hover {
+    background: #1D4ED8;
+}
+
+.detalhe-fav-btn:disabled {
+    opacity: .6;
+    cursor: wait;
+}

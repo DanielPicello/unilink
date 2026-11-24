@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favoritos | UniLink</title>
+    <link rel="icon" type="image/png" href="img/marca/favicon.png">
+    <link rel="stylesheet" href="css/dashboard/painel.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        document.documentElement.classList.add("panel-guard-pending");
+        setTimeout(function () {
+            document.documentElement.classList.remove("panel-guard-pending");
+        }, 3000);
+    </script>
+</head>
+
+<body class="panel-body">
+    <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+    <aside class="panel-sidebar" id="panelSidebar" data-panel="aluno">
+        <div class="panel-logo-block">
+            <a href="index.html" class="panel-logo">
+                <div class="panel-logo-icon">
+                    <img src="img/marca/logo.png" alt="Logo">
+                </div>
+                <span class="panel-logo-text">Uni<span>Link</span></span>
+            </a>
+        </div>
+        <nav class="panel-nav" id="panelNav"></nav>
+        <div class="panel-sidebar-bottom">
+            <a href="configuracoes.html" class="panel-nav-link">
+                <i class='bx bx-cog'></i>
+                <span>Configurações</span>
+            </a>
+            <a href="faq.html" class="panel-nav-link">
+                <i class='bx bx-help-circle'></i>
+                <span>Ajuda</span>
+            </a>
+            <a href="index.html" class="panel-nav-link panel-logout">
+                <i class='bx bx-log-out'></i>
+                <span>Sair</span>
+            </a>
+        </div>
+    </aside>
+    <div class="panel-overlay" id="panelOverlay"></div>
+    <div class="panel-main">
+        <header class="panel-topbar">
+            <button class="panel-toggle-btn" id="sidebarToggle" aria-label="Abrir/fechar menu">
+                <i class='bx bx-dock-left'></i>
+            </button>
+            <div class="panel-search">
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Buscar aulas, professores, vagas...">
+            </div>
+            <div class="panel-topbar-actions">
+                <button class="panel-icon-btn" aria-label="Notificações">
+                    <i class='bx bx-bell'></i>
+                </button>
+                <div class="panel-avatar">AN</div>
+            </div>
+        </header>
+        <main id="conteudo" tabindex="-1" class="panel-content">
+            <section class="fav-page-head">
+                <span class="panel-chip">
+                    <i class='bx bx-heart'></i>
+                    Conexões
+                </span>
+                <h1>Professores favoritos</h1>
+                <p>Os professores que você salvou para acompanhar.</p>
+            </section>
+
+            <section class="fav-stats" aria-label="Resumo dos favoritos">
+                <div class="panel-stat-card">
+                    <div class="panel-stat-icon panel-icon-blue">
+                        <i class='bx bx-heart' aria-hidden="true"></i>
+                    </div>
+                    <span class="panel-stat-label">Total de favoritos</span>
+                    <strong class="panel-stat-value" id="favStatTotal">—</strong>
+                </div>
+                <div class="panel-stat-card">
+                    <div class="panel-stat-icon panel-icon-green">
+                        <i class='bx bx-user-check' aria-hidden="true"></i>
+                    </div>
+                    <span class="panel-stat-label">Professores disponíveis</span>
+                    <strong class="panel-stat-value" id="favStatDisponiveis">—</strong>
+                </div>
+                <div class="panel-stat-card">
+                    <div class="panel-stat-icon panel-icon-orange">
+                        <i class='bx bx-user-x' aria-hidden="true"></i>
+                    </div>
+                    <span class="panel-stat-label">Indisponíveis</span>
+                    <strong class="panel-stat-value" id="favStatIndisponiveis">—</strong>
+                </div>
+            </section>
+
+            <section class="panel-card panel-favoritos-card">
+                <div class="panel-card-header">
+                    <h2>Meus favoritos</h2>
+                    <div class="panel-fav-header-actions">
+                        <span class="panel-fav-total" id="favTotal" hidden></span>
+                        <a href="professores.html" class="panel-link">Buscar professores</a>
+                    </div>
+                </div>
+
+                <div class="fav-state" id="favLoading" role="status">
+                    <i class='bx bx-loader-alt bx-spin' aria-hidden="true"></i>
+                    <strong>Carregando favoritos...</strong>
+                </div>
+
+                <div class="fav-state" id="favEmpty" role="status" hidden>
+                    <i class='bx bx-heart' aria-hidden="true"></i>
+                    <strong>Você ainda não tem favoritos</strong>
+                    <span>Encontre um professor na busca e toque em Favoritar.</span>
+                    <a class="panel-btn-outline" href="professores.html">Buscar professores</a>
+                </div>
+
+                <div class="fav-state" id="favError" role="alert" hidden>
+                    <i class='bx bx-wifi-off' aria-hidden="true"></i>
+                    <strong>Não foi possível carregar</strong>
+                    <span>Verifique se a API está rodando em localhost:8080.</span>
+                    <button type="button" class="panel-btn-outline" id="favRetry">Tentar novamente</button>
+                </div>
+
+                <div class="fav-state" id="favForbidden" role="status" hidden>
+                    <i class='bx bx-info-circle' aria-hidden="true"></i>
+                    <strong>Área indisponível</strong>
+                    <span>Favoritos estão disponíveis apenas para contas de aluno.</span>
+                </div>
+
+                <div class="panel-fav-list" id="favList" hidden></div>
+
+                <button type="button" class="panel-btn-outline panel-fav-more" id="favMore" hidden>
+                    Carregar mais
+                </button>
+            </section>
+        </main>
+    </div>
+    <script src="js/api/client.js"></script>
+    <script src="js/auth/session.js"></script>
+    <script src="js/dashboard/painel.js"></script>
+    <script src="js/favorites/favorites.js"></script>
+    <script src="js/dashboard/favoritos.js"></script>
+</body>
+
+</html>

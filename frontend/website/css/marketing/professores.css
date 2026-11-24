@@ -705,3 +705,41 @@
         transition: none;
     }
 }
+
+.card-info .fav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    background: #fff;
+    color: #6B7280;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.card-info .fav-btn span {
+    display: none;
+}
+
+.card-info .fav-btn:hover,
+.card-info .fav-btn[aria-pressed="true"] {
+    background: #FEE2E2;
+    color: #DC2626;
+    border-color: #FECACA;
+}
+
+.card-info .fav-btn:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.card-info .fav-btn[hidden] {
+    display: none;
+}

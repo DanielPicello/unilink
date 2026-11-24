@@ -113,7 +113,7 @@
                         <i class='bx bx-heart'></i>
                     </div>
                     <span class="panel-stat-label">Professores favoritos</span>
-                    <strong class="panel-stat-value">6</strong>
+                    <strong class="panel-stat-value" id="favStatValue">—</strong>
                 </div>
                 <div class="panel-stat-card">
                     <div class="panel-stat-icon panel-icon-green">
@@ -300,34 +300,12 @@
                 <div class="panel-card">
                     <div class="panel-card-header">
                         <h2>Professores favoritos</h2>
-                        <a href="professores.html" class="panel-link">Explorar</a>
+                        <a href="painel-favoritos.html" class="panel-link">Ver todos</a>
                     </div>
-                    <div class="panel-fav-list">
-                        <div class="panel-fav">
-                            <img src="img/professores/teacher-2.jpg" alt="Camila Ribeiro" class="panel-avatar-img">
-                            <div class="panel-fav-info">
-                                <h4>Camila Ribeiro</h4>
-                                <span>Biologia · UFRJ</span>
-                            </div>
-                            <strong class="panel-fav-price">R$ 70/h</strong>
-                        </div>
-                        <div class="panel-fav">
-                            <img src="img/professores/teacher-3.jpg" alt="Luana Andrade" class="panel-avatar-img">
-                            <div class="panel-fav-info">
-                                <h4>Luana Andrade</h4>
-                                <span>Cálculo · USP</span>
-                            </div>
-                            <strong class="panel-fav-price">R$ 80/h</strong>
-                        </div>
-                        <div class="panel-fav">
-                            <img src="img/professores/teacher-1.jpg" alt="Marina Souza" class="panel-avatar-img">
-                            <div class="panel-fav-info">
-                                <h4>Marina Souza</h4>
-                                <span>Redação · UFMG</span>
-                            </div>
-                            <strong class="panel-fav-price">R$ 60/h</strong>
-                        </div>
-                    </div>
+                    <div class="panel-fav-list" id="favResumoLista" hidden></div>
+                    <p class="panel-fav-empty" id="favResumoVazio" hidden>
+                        Você ainda não tem professores favoritos.
+                    </p>
                 </div>
             </section>
         </main>
@@ -335,6 +313,8 @@
     <script src="js/api/client.js"></script>
     <script src="js/auth/session.js"></script>
     <script src="js/dashboard/painel.js"></script>
+    <script src="js/favorites/favorites.js"></script>
+    <script src="js/dashboard/favoritos-resumo.js"></script>
 </body>
 
 </html>

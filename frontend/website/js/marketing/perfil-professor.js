@@ -11,6 +11,7 @@ const TEACHER_ID_KEY = "unilinkTeacherId";
 const SLUG_PAGE_SIZE = 50;
 
 let currentTeacher = null;
+let favoriteButton = null;
 
 function formatMoney(value) {
     return `R$ ${Number(value || 0).toFixed(2).replace(".", ",")}`;
@@ -148,6 +149,22 @@ detailHours.addEventListener("change", () => {
     renderCalculation();
 });
 
+async function initFavoriteButton(teacherId) {
+    const host = document.getElementById("detailFavoriteHost");
+    if (!host) return;
+
+    const status = await loadFavoriteStatus([teacherId]);
+    if (status === null) return;
+
+    favoriteButton = createFavoriteButton(
+        teacherId,
+        status.has(teacherId),
+        "detalhe-fav-btn"
+    );
+
+    host.replaceChildren(favoriteButton);
+}
+
 async function initTeacherDetail() {
     const params = new URLSearchParams(window.location.search);
     const slug = params.get("p");
@@ -190,6 +207,8 @@ async function initTeacherDetail() {
         const teacher = await getTeacher(teacherId);
         sessionStorage.setItem(TEACHER_ID_KEY, teacher.teacherId);
         currentTeacher = teacher;
+
+        await initFavoriteButton(teacher.teacherId);    
 
         detailLoading.hidden = true;
         detailCard.hidden = false;

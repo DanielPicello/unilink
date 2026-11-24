@@ -266,6 +266,10 @@ function createTeacherCard(teacher) {
     taxa.textContent = formatRate(teacher.hourlyRate);
     avaliacao.appendChild(taxa);
 
+    const favButton = createFavoriteButton(teacher.teacherId);
+    favButton.hidden = true;
+    avaliacao.appendChild(favButton);
+
     info.append(universidade, nome, formacao, cidade, avaliacao);
 
     const modes = document.createElement("div");
@@ -327,6 +331,8 @@ async function carregarProfessores({ append = false } = {}) {
             grid.appendChild(createTeacherCard(teacher));
         });
 
+        await aplicarStatusFavoritos();
+
         paginaVisivel = append ? paginaVisivel + 1 : 1;
         emptyState.hidden = filtrados.length > 0;
         moreButton.hidden = fim >= filtrados.length;
@@ -346,6 +352,32 @@ async function carregarProfessores({ append = false } = {}) {
         moreButton.disabled = false;
         loading.hidden = true;
     }
+}
+
+async function aplicarStatusFavoritos() {
+    const botoes = [...grid.querySelectorAll(".fav-btn")];
+    if (!botoes.length) return;
+
+    const ids = botoes.map((botao) => botao.dataset.teacherId);
+    const favoritos = new Set();
+
+    for (let i = 0; i < ids.length; i += 50) {
+        const status = await loadFavoriteStatus(ids.slice(i, i + 50));
+
+        if (status === null) {
+            botoes.forEach((botao) => {
+                botao.hidden = true;
+            });
+            return;
+        }
+
+        status.forEach((id) => favoritos.add(id));
+    }
+
+    botoes.forEach((botao) => {
+        renderFavoriteButton(botao, favoritos.has(botao.dataset.teacherId));
+        botao.hidden = false;
+    });
 }
 
 pesquisa.addEventListener("input", () => {

@@ -159,3 +159,37 @@ function searchTeachers(params = {}) {
 function getTeacher(teacherId) {
     return apiRequest(`/teachers/${encodeURIComponent(teacherId)}`);
 }
+
+function listFavoriteTeachers({ page = 0, size = 12 } = {}) {
+    const query = new URLSearchParams({
+        page: String(page),
+        size: String(size),
+    });
+
+    return apiRequest(`/students/me/favorites?${query.toString()}`);
+}
+
+function getFavoriteTeacherStatus(teacherIds) {
+    if (!Array.isArray(teacherIds) || teacherIds.length === 0) {
+        return Promise.resolve([]);
+    }
+
+    const query = new URLSearchParams();
+    teacherIds.forEach((id) => query.append("teacherIds", id));
+
+    return apiRequest(`/students/me/favorites/status?${query.toString()}`);
+}
+
+function addFavoriteTeacher(teacherId) {
+    return apiRequest(
+        `/students/me/favorites/${encodeURIComponent(teacherId)}`,
+        { method: "POST" }
+    );
+}
+
+function removeFavoriteTeacher(teacherId) {
+    return apiRequest(
+        `/students/me/favorites/${encodeURIComponent(teacherId)}`,
+        { method: "DELETE" }
+    );
+}
